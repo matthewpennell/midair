@@ -1,7 +1,10 @@
 services:
   www:
-    build:
-      dockerfile: ./Dockerfile
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    tty: true
     volumes:
       - "./:/var/www" # sync local dir with container web dir
     ports:
@@ -10,8 +13,17 @@ services:
   db:
     image: mysql:latest
     environment:
-      - MYSQL_DATABASE=midair
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=midair
+    volumes:
+      - "./mysql:/docker-entrypoint-initdb.d" # sync MySQL data with container
+    healthcheck:
+      test: "mysql -uroot -proot midair -e 'select 1'"
+      interval: 5s
+      retries: 5
+      start_period: 5s
+      timeout: 10s
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
