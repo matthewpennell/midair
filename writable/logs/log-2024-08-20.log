@@ -1,0 +1,152 @@
+CRITICAL - 2024-08-20 19:17:21 --> Error: Class "Locale" not found
+[Method: GET, Route: /]
+in SYSTEMPATH/CodeIgniter.php on line 190.
+ 1 SYSTEMPATH/Boot.php(312): CodeIgniter\CodeIgniter->initialize()
+ 2 SYSTEMPATH/Boot.php(66): CodeIgniter\Boot::initializeCodeIgniter()
+ 3 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-08-20 19:17:45 --> Error: Class "Locale" not found
+[Method: GET, Route: /]
+in SYSTEMPATH/CodeIgniter.php on line 190.
+ 1 SYSTEMPATH/Boot.php(312): CodeIgniter\CodeIgniter->initialize()
+ 2 SYSTEMPATH/Boot.php(66): CodeIgniter\Boot::initializeCodeIgniter()
+ 3 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-08-20 19:18:20 --> Error: Class "Locale" not found
+[Method: GET, Route: /]
+in SYSTEMPATH/CodeIgniter.php on line 190.
+ 1 SYSTEMPATH/Boot.php(312): CodeIgniter\CodeIgniter->initialize()
+ 2 SYSTEMPATH/Boot.php(66): CodeIgniter\Boot::initializeCodeIgniter()
+ 3 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-08-20 19:18:20 --> ErrorException: Uncaught Error: Class "Locale" not found in /var/www/system/Helpers/number_helper.php:140
+Stack trace:
+#0 /var/www/system/Helpers/number_helper.php(58): format_number(6.0, 2, NULL, Array)
+#1 /var/www/system/Debug/BaseExceptionHandler.php(154): number_to_size(6.0, 2)
+#2 /var/www/app/Views/errors/html/error_exception.php(409): CodeIgniter\Debug\BaseExceptionHandler::describeMemory(6291456)
+#3 /var/www/system/Debug/BaseExceptionHandler.php(266): include('/var/www/app/Vi...')
+#4 /var/www/system/Debug/BaseExceptionHandler.php(269): CodeIgniter\Debug\BaseExceptionHandler->CodeIgniter\Debug\{closure}()
+#5 /var/www/system/Debug/ExceptionHandler.php(114): CodeIgniter\Debug\BaseExceptionHandler->render(Object(Error), 500, '/var/www/app/Vi...')
+#6 /var/www/system/Debug/Exceptions.php(163): CodeIgniter\Debug\ExceptionHandler->handle(Object(Error), Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), 500, 1)
+#7 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(Error))
+#8 {main}
+  thrown
+【Previous Exception】
+Error
+Class "Locale" not found
+#0 /var/www/system/Boot.php(312): CodeIgniter\CodeIgniter->initialize()
+#1 /var/www/system/Boot.php(66): CodeIgniter\Boot::initializeCodeIgniter()
+#2 /var/www/public/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#3 {main}
+[Method: GET, Route: /]
+in SYSTEMPATH/Helpers/number_helper.php on line 140.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-08-20 19:19:57 --> Error: Class "Locale" not found
+[Method: GET, Route: /]
+in SYSTEMPATH/CodeIgniter.php on line 190.
+ 1 SYSTEMPATH/Boot.php(312): CodeIgniter\CodeIgniter->initialize()
+ 2 SYSTEMPATH/Boot.php(66): CodeIgniter\Boot::initializeCodeIgniter()
+ 3 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-08-20 19:19:57 --> ErrorException: Uncaught Error: Class "Locale" not found in /var/www/system/Helpers/number_helper.php:140
+Stack trace:
+#0 /var/www/system/Helpers/number_helper.php(58): format_number(6.0, 2, NULL, Array)
+#1 /var/www/system/Debug/BaseExceptionHandler.php(154): number_to_size(6.0, 2)
+#2 /var/www/app/Views/errors/html/error_exception.php(409): CodeIgniter\Debug\BaseExceptionHandler::describeMemory(6291456)
+#3 /var/www/system/Debug/BaseExceptionHandler.php(266): include('/var/www/app/Vi...')
+#4 /var/www/system/Debug/BaseExceptionHandler.php(269): CodeIgniter\Debug\BaseExceptionHandler->CodeIgniter\Debug\{closure}()
+#5 /var/www/system/Debug/ExceptionHandler.php(114): CodeIgniter\Debug\BaseExceptionHandler->render(Object(Error), 500, '/var/www/app/Vi...')
+#6 /var/www/system/Debug/Exceptions.php(163): CodeIgniter\Debug\ExceptionHandler->handle(Object(Error), Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), 500, 1)
+#7 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(Error))
+#8 {main}
+  thrown
+【Previous Exception】
+Error
+Class "Locale" not found
+#0 /var/www/system/Boot.php(312): CodeIgniter\CodeIgniter->initialize()
+#1 /var/www/system/Boot.php(66): CodeIgniter\Boot::initializeCodeIgniter()
+#2 /var/www/public/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#3 {main}
+[Method: GET, Route: /]
+in SYSTEMPATH/Helpers/number_helper.php on line 140.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-08-20 19:30:50 --> Error: Class "Locale" not found
+[Method: GET, Route: /]
+in SYSTEMPATH/CodeIgniter.php on line 190.
+ 1 SYSTEMPATH/Boot.php(312): CodeIgniter\CodeIgniter->initialize()
+ 2 SYSTEMPATH/Boot.php(66): CodeIgniter\Boot::initializeCodeIgniter()
+ 3 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-08-20 19:30:50 --> ErrorException: Uncaught Error: Class "Locale" not found in /var/www/system/Helpers/number_helper.php:140
+Stack trace:
+#0 /var/www/system/Helpers/number_helper.php(58): format_number(6.0, 2, NULL, Array)
+#1 /var/www/system/Debug/BaseExceptionHandler.php(154): number_to_size(6.0, 2)
+#2 /var/www/app/Views/errors/html/error_exception.php(409): CodeIgniter\Debug\BaseExceptionHandler::describeMemory(6291456)
+#3 /var/www/system/Debug/BaseExceptionHandler.php(266): include('/var/www/app/Vi...')
+#4 /var/www/system/Debug/BaseExceptionHandler.php(269): CodeIgniter\Debug\BaseExceptionHandler->CodeIgniter\Debug\{closure}()
+#5 /var/www/system/Debug/ExceptionHandler.php(114): CodeIgniter\Debug\BaseExceptionHandler->render(Object(Error), 500, '/var/www/app/Vi...')
+#6 /var/www/system/Debug/Exceptions.php(163): CodeIgniter\Debug\ExceptionHandler->handle(Object(Error), Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), 500, 1)
+#7 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(Error))
+#8 {main}
+  thrown
+【Previous Exception】
+Error
+Class "Locale" not found
+#0 /var/www/system/Boot.php(312): CodeIgniter\CodeIgniter->initialize()
+#1 /var/www/system/Boot.php(66): CodeIgniter\Boot::initializeCodeIgniter()
+#2 /var/www/public/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#3 {main}
+[Method: GET, Route: /]
+in SYSTEMPATH/Helpers/number_helper.php on line 140.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-08-20 19:31:03 --> Error: Class "Locale" not found
+[Method: GET, Route: /]
+in SYSTEMPATH/CodeIgniter.php on line 190.
+ 1 SYSTEMPATH/Boot.php(312): CodeIgniter\CodeIgniter->initialize()
+ 2 SYSTEMPATH/Boot.php(66): CodeIgniter\Boot::initializeCodeIgniter()
+ 3 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-08-20 19:31:03 --> ErrorException: Uncaught Error: Class "Locale" not found in /var/www/system/Helpers/number_helper.php:140
+Stack trace:
+#0 /var/www/system/Helpers/number_helper.php(58): format_number(6.0, 2, NULL, Array)
+#1 /var/www/system/Debug/BaseExceptionHandler.php(154): number_to_size(6.0, 2)
+#2 /var/www/app/Views/errors/html/error_exception.php(409): CodeIgniter\Debug\BaseExceptionHandler::describeMemory(6291456)
+#3 /var/www/system/Debug/BaseExceptionHandler.php(266): include('/var/www/app/Vi...')
+#4 /var/www/system/Debug/BaseExceptionHandler.php(269): CodeIgniter\Debug\BaseExceptionHandler->CodeIgniter\Debug\{closure}()
+#5 /var/www/system/Debug/ExceptionHandler.php(114): CodeIgniter\Debug\BaseExceptionHandler->render(Object(Error), 500, '/var/www/app/Vi...')
+#6 /var/www/system/Debug/Exceptions.php(163): CodeIgniter\Debug\ExceptionHandler->handle(Object(Error), Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), 500, 1)
+#7 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(Error))
+#8 {main}
+  thrown
+【Previous Exception】
+Error
+Class "Locale" not found
+#0 /var/www/system/Boot.php(312): CodeIgniter\CodeIgniter->initialize()
+#1 /var/www/system/Boot.php(66): CodeIgniter\Boot::initializeCodeIgniter()
+#2 /var/www/public/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#3 {main}
+[Method: GET, Route: /]
+in SYSTEMPATH/Helpers/number_helper.php on line 140.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-08-20 19:43:17 --> Error: Class "Locale" not found
+[Method: GET, Route: /]
+in SYSTEMPATH/CodeIgniter.php on line 190.
+ 1 SYSTEMPATH/Boot.php(312): CodeIgniter\CodeIgniter->initialize()
+ 2 SYSTEMPATH/Boot.php(66): CodeIgniter\Boot::initializeCodeIgniter()
+ 3 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-08-20 19:43:18 --> ErrorException: Uncaught Error: Class "Locale" not found in /var/www/system/Helpers/number_helper.php:140
+Stack trace:
+#0 /var/www/system/Helpers/number_helper.php(58): format_number(6.0, 2, NULL, Array)
+#1 /var/www/system/Debug/BaseExceptionHandler.php(154): number_to_size(6.0, 2)
+#2 /var/www/app/Views/errors/html/error_exception.php(409): CodeIgniter\Debug\BaseExceptionHandler::describeMemory(6291456)
+#3 /var/www/system/Debug/BaseExceptionHandler.php(266): include('/var/www/app/Vi...')
+#4 /var/www/system/Debug/BaseExceptionHandler.php(269): CodeIgniter\Debug\BaseExceptionHandler->CodeIgniter\Debug\{closure}()
+#5 /var/www/system/Debug/ExceptionHandler.php(114): CodeIgniter\Debug\BaseExceptionHandler->render(Object(Error), 500, '/var/www/app/Vi...')
+#6 /var/www/system/Debug/Exceptions.php(163): CodeIgniter\Debug\ExceptionHandler->handle(Object(Error), Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), 500, 1)
+#7 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(Error))
+#8 {main}
+  thrown
+【Previous Exception】
+Error
+Class "Locale" not found
+#0 /var/www/system/Boot.php(312): CodeIgniter\CodeIgniter->initialize()
+#1 /var/www/system/Boot.php(66): CodeIgniter\Boot::initializeCodeIgniter()
+#2 /var/www/public/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#3 {main}
+[Method: GET, Route: /]
+in SYSTEMPATH/Helpers/number_helper.php on line 140.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()

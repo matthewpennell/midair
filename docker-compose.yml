@@ -3,7 +3,7 @@ services:
     build:
       dockerfile: ./Dockerfile
     volumes:
-      - "./:/var/www/html" # sync local dir with container web dir
+      - "./:/var/www" # sync local dir with container web dir
     ports:
       - 80:80
       - 443:443
