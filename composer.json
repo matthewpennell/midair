@@ -1,14 +1,9 @@
 {
-    "name": "codeigniter4/framework",
-    "description": "The CodeIgniter framework v4",
-    "license": "MIT",
+    "name": "midair",
+    "description": "Personal content aggregation, storage and display.",
+    "license": "GPL-3.0",
     "type": "project",
-    "homepage": "https://codeigniter.com",
-    "support": {
-        "forum": "https://forum.codeigniter.com/",
-        "source": "https://github.com/codeigniter4/CodeIgniter4",
-        "slack": "https://codeigniterchat.slack.com"
-    },
+    "homepage": "https://github.com/matthewpennell/midair",
     "require": {
         "php": "^8.1",
         "ext-intl": "*",

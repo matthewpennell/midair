@@ -18,6 +18,8 @@ services:
       - MYSQL_DATABASE=midair
     volumes:
       - "./mysql:/docker-entrypoint-initdb.d" # sync MySQL data with container
+    ports:
+      - 3306:3306 # expose port for MySQL Workbench
     healthcheck:
       test: "mysql -uroot -proot midair -e 'select 1'"
       interval: 5s
