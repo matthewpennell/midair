@@ -42,6 +42,7 @@ class Autoload extends AutoloadConfig
     public $psr4 = [
         APP_NAMESPACE => APPPATH,
         'Midair\Article' => ROOTPATH . 'midair/Article',
+        'Midair\Bluesky' => ROOTPATH . 'midair/Bluesky',
         'Midair\Review' => ROOTPATH . 'midair/Review',
     ];
 
