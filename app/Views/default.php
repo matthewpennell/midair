@@ -17,6 +17,7 @@
                 margin: 20px;
             }
         </style>
+        <script src="https://unpkg.com/htmx.org@2.0.4"></script>
     </head>
     <body>
         <?= $this->include('partials/navigation') ?>

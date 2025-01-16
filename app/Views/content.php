@@ -3,4 +3,7 @@
 <?= $this->section('content') ?>
     <h1>Hello World!</h1>
     <?= $content ?>
+    <div hx-get="/?p=<?= $next_page ?>" hx-trigger="revealed" hx-swap="outerHTML">
+        spinner.gif
+    </div>
 <?= $this->endSection() ?>

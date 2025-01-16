@@ -10,8 +10,16 @@ class Home extends BaseController
         $db = db_connect();
         $MidairModel = new \App\Models\Midair();
 
-        // Retrieve all entries from the relevant table.
-        $items = $MidairModel->asObject()->orderBy('date', 'DESC')->findAll();
+        // Check for a page query parameter.
+        $p = (int) $this->request->getGet('p');
+        if (! $p) {
+            $p = 1;
+        }
+        $per_page = 10;
+        $offset = ($p * $per_page) - $per_page;
+
+        // Retrieve the relevant page of entries from the relevant table.
+        $items = $MidairModel->asObject()->orderBy('date', 'DESC')->limit($per_page, $offset)->findAll();
 
         // Build the HTML output of the items feed.
         $content = '';
@@ -26,8 +34,11 @@ class Home extends BaseController
         }
 
         // Load the main content view and pass in the data.
-        return view('content', [
+        $view = ($p > 1) ? 'page' : 'content';
+        return view($view, [
             'content' => $content,
+            'show_next' => count($items),
+            'next_page' => $p + 1,
         ]);
     }
 }
