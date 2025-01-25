@@ -1,0 +1,106 @@
+body {
+    background: rgba(3, 55, 70, 0.05);
+    color: #000;
+    font: 20px/1.5 "Roboto Serif", serif;
+}
+
+a {
+    color: #000;
+}
+
+figure {
+    margin: 0 0 15px;
+}
+
+h2 {
+    font: 30px/1.5 "Roboto", sans-serif;
+    font-weight: 800;
+    margin: 0 0 15px;
+}
+
+p {
+    margin: 0 0 30px;
+}
+
+.read-more {
+    margin-top: -15px;
+}
+
+h2 a, .read-more a {
+    padding: 5px 10px;
+    margin-left: -10px;
+}
+
+h2 a:hover, h2 a:focus,
+.read-more a:hover, .read-more a:focus {
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    margin: 90px auto;
+    max-width: 760px; /* 75 characters per line for 20px Roboto Serif */
+}
+
+main::before {
+    content: "";
+    position: fixed;
+    background: #F4DD4B;
+    width: 30px;
+    height: 90px;
+    top: 0;
+    right: 90px;
+}
+
+article {
+    margin-bottom: 90px;
+}
+
+.meta {
+    font: 15px/1 "Roboto", sans-serif;
+    text-transform: uppercase;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.meta svg {
+    position: absolute;
+    left: -30px;
+}
+
+.ma-type {
+    font-weight: bold;
+}
+
+.ma-type.bluesky {
+    color: #0085FF;
+}
+
+.ma-type.article {
+    color: #C03374;
+}
+
+.ma-type.review {
+    color: #33746F;
+}
+
+#loading {
+    display: flex;
+    justify-content: center;
+}
+
+/* Type-specific style overrides */
+
+.review figure img {
+    float: left;
+    margin: 0 15px 15px 0;
+}
+
+.review iframe {
+    width: 100%;
+}
+
+.review iframe[id*="youtube"] {
+    height: 427px;
+}

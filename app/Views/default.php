@@ -1,34 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>matthewpennell.com</title>
-        <style>
-            body {
-                margin: 20px;
-            }
-            nav ul {
-                list-style-type: none;
-                margin: 0;
-                padding: 0;
-            }
-            nav ul li {
-                display: inline;
-                margin-right: 10px;
-            }
-            article {
-                padding: 20px;
-                border-bottom: 1px solid grey;
-            }
-            footer {
-                clear: both;
-                margin: 20px;
-            }
-        </style>
+        <meta name="description" content="">
+
+        <meta property="og:title" content="">
+        <meta property="og:type" content="">
+        <meta property="og:url" content="">
+        <meta property="og:image" content="">
+        <meta property="og:image:alt" content="">
+
+        <link rel="icon" href="/favicon.ico" sizes="any">
+        <link rel="icon" href="/icon.svg" type="image/svg+xml">
+        <link rel="apple-touch-icon" href="icon.png">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/css/midair.css">
         <script src="https://unpkg.com/htmx.org@2.0.4"></script>
     </head>
     <body hx-boost="true">
-        <?= $this->include('partials/navigation') ?>
-        <?= $this->renderSection('content') ?>
+        <main>
+            <?= $this->renderSection('content') ?>
+        </main>
         <?= $this->include('partials/footer') ?>
     </body>
 </html>
