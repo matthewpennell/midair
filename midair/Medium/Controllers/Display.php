@@ -40,7 +40,7 @@ class Display extends BaseController
        $MediumModel = new \Midair\Medium\Models\Medium();
 
        // Retrieve the item from the database.
-       $medium = $MediumModel->asObject()->like('link', env('medium.rss_link_root') . $url)->first();
+       $medium = $MediumModel->asObject()->like('link', $url)->first();
 
         // If the item doesn't exist, throw a 404 error.
         if (empty($medium)) {
