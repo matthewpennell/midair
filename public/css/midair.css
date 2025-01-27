@@ -12,13 +12,26 @@ figure {
     margin: 0 0 15px;
 }
 
+h1 {
+    font: 45px/1.3333 "Roboto", sans-serif;
+    font-weight: 800;
+    margin: 0 90px 90px;
+    text-align: center;
+}
+
 h2 {
     font: 30px/1.5 "Roboto", sans-serif;
     font-weight: 800;
     margin: 0 0 15px;
 }
 
-p {
+h3 {
+    font: 20px/1.5 "Roboto", sans-serif;
+    font-weight: 800;
+    margin: 0 0 15px;
+}
+
+p, ul, ol {
     margin: 0 0 30px;
 }
 
@@ -51,6 +64,13 @@ main::before {
     height: 90px;
     top: 0;
     right: 90px;
+}
+
+#article img {
+    border: 15px solid #fff;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto 30px;
 }
 
 article {
@@ -103,4 +123,14 @@ article {
 
 .review iframe[id*="youtube"] {
     height: 427px;
+}
+
+/* View transitions */
+
+@view-transition {
+    navigation: auto;
+}
+
+.article h2, #article h1 {
+    view-transition-name: --title;
 }
