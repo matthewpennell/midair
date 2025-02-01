@@ -77,12 +77,14 @@ class Import extends BaseController {
                     'date' => date('Y-m-d H:i:s', strtotime($pubDate)),
                     'title' => $title,
                     'url' => str_replace([env('article.rss_link_root'), '/'], ['', ''], $link), // strip the root URL and trailing slash
+                    'source' => $link,
                     'excerpt' => $description,
                     'content' => $content,
                     'type' => 'article',
                 );
 
                 $MidairModel->insert($data);
+
                 log_message('info', 'Inserted new article into main stream table.');
 
             }

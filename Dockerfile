@@ -9,6 +9,8 @@ RUN docker-php-ext-configure intl && docker-php-ext-install intl && docker-php-e
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
+# Fix the shell so that console is easier to work with
+RUN ln -sf /bin/bash /bin/sh
 
 # Copy composer to container in case it is needed
 COPY --from=composer /usr/bin/composer /usr/bin/composer

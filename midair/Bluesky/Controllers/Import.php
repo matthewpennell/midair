@@ -77,9 +77,10 @@ class Import extends BaseController {
                     'date' => date('Y-m-d H:i:s', strtotime($pubDate)),
                     'title' => $title,
                     'url' => str_replace([env('bluesky.rss_link_root'), '/'], ['', ''], $link), // strip the root URL and trailing slash
+                    'source' => $link,
                     'excerpt' => $description,
                     'content' => $content,
-                    'type' => 'skeet',
+                    'type' => 'bluesky',
                 );
 
                 $MidairModel->insert($data);
@@ -89,8 +90,8 @@ class Import extends BaseController {
 
         }
 
-        log_message('info', "Import completed - added $newBlueskysCount new blueskys.");
-        echo "Import completed - added $newBlueskysCount new blueskys.";
+        log_message('info', "Import completed - added $newBlueskysCount new skeets.");
+        echo "Import completed - added $newBlueskysCount new skeets.";
 
     }
 

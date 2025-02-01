@@ -50,6 +50,14 @@ class Import extends BaseController {
                 $pubDate = (string) $item->pubDate;
                 $content = (string) $item->children('content', true)->encoded;
 
+                // If there's no content, use the description (which contains the full article)
+                // and create a shorter excerpt from first three sentences.
+                if ($content == '') {
+                    $content = $description;
+                    preg_match_all('/[^.!?]*[.!?]/', strip_tags($content), $matches);
+                    $description = implode(' ', array_slice($matches[0], 0, 3));
+                }
+
                 // Loop through all <category> elements and create a comma-separated string.
                 $categories = [];
                 foreach ($item->category as $category) {
@@ -77,6 +85,7 @@ class Import extends BaseController {
                     'date' => date('Y-m-d H:i:s', strtotime($pubDate)),
                     'title' => $title,
                     'url' => str_replace([env('review.rss_link_root'), '/'], ['', ''], $link), // strip the root URL and trailing slash
+                    'source' => $link,
                     'excerpt' => $description,
                     'content' => $content,
                     'type' => 'review',

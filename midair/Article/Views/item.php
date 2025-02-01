@@ -4,7 +4,7 @@
         &bull;
         <time datetime="<?= $data->date ?>"><?= date('jS M Y', strtotime($data->date)) ?></time>
         &bull;
-        <a href="/bluesky/<?= $data->url ?>">🔗</a>
+        <a href="/bluesky/<?= $data->url ?>" class="permalink"><span class="material-symbols-outlined">link</span></a>
     </div>
     <h2>
         <a href="/article/<?= $data->url ?>">

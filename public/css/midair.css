@@ -2,6 +2,7 @@ body {
     background: rgba(3, 55, 70, 0.05);
     color: #000;
     font: 20px/1.5 "Roboto Serif", serif;
+    padding: 90px 0;
 }
 
 a {
@@ -39,26 +40,32 @@ p, ul, ol {
     margin-top: -15px;
 }
 
-h2 a, .read-more a {
-    padding: 5px 10px;
-    margin-left: -10px;
-}
-
+a.permalink:hover, a.permalink:focus,
 h2 a:hover, h2 a:focus,
-.read-more a:hover, .read-more a:focus {
-    background: #000;
-    color: #fff;
+.read-more a:hover, .read-more a:focus,
+#article a:hover, #article a:focus {
     text-decoration: none;
+    color: #C03374;
 }
 
 main {
-    margin: 90px auto;
+    margin: 0 auto;
     max-width: 760px; /* 75 characters per line for 20px Roboto Serif */
+}
+
+/* Add extra padding for mobile devices */
+@media (max-width: 600px) {
+    main {
+        padding: 0 15px;
+    }
+    .meta svg {
+        display: none;
+    }
 }
 
 main::before {
     content: "";
-    position: fixed;
+    position: absolute;
     background: #F4DD4B;
     width: 30px;
     height: 90px;
@@ -105,9 +112,25 @@ article {
     color: #33746F;
 }
 
+.meta .permalink span {
+    line-height: 20px;
+    font-size: 20px;
+    vertical-align: text-bottom;
+}
+
 #loading {
-    display: flex;
-    justify-content: center;
+    animation: spin 2s linear infinite;
+    aspect-ratio: 1/cos(30deg);
+    background: #F4DD4B;
+    clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
+    height: 60px;
+    margin: 0 auto;
+}
+
+@keyframes spin { 
+    100% { 
+        transform:rotate(360deg); 
+    } 
 }
 
 /* Type-specific style overrides */

@@ -83,6 +83,7 @@ class Import extends BaseController {
                     'date' => date('Y-m-d H:i:s', strtotime($pubDate)),
                     'title' => $title,
                     'url' => str_replace(env('medium.rss_link_root'), '', end(...[explode('/', explode('?', $link)[0])])), // strip the root URL and querystring, and only use the last segment
+                    'source' => explode('?', $link)[0], // strip the querystring
                     'excerpt' => $description,
                     'content' => $content,
                     'type' => 'medium',

@@ -8,7 +8,7 @@ class Midair extends Model
 {
     protected $table            = 'midair';
     protected $primaryKey       = 'id';
-    protected $allowedFields    = ['date', 'title', 'url', 'excerpt', 'content', 'status', 'type'];
+    protected $allowedFields    = ['date', 'title', 'url', 'source', 'excerpt', 'content', 'status', 'type'];
 
     // Dates
     protected $useTimestamps = true;
