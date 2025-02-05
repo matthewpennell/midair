@@ -44,7 +44,9 @@ class Autoload extends AutoloadConfig
         'Midair\Article' => ROOTPATH . 'midair/Article',
         'Midair\Bluesky' => ROOTPATH . 'midair/Bluesky',
         'Midair\Review' => ROOTPATH . 'midair/Review',
+        'Midair\Flashfiction' => ROOTPATH . 'midair/Flashfiction',
         'Midair\Medium' => ROOTPATH . 'midair/Medium',
+        'Midair\Strava' => ROOTPATH . 'midair/Strava',
         'Midair\Letterboxd' => ROOTPATH . 'midair/Letterboxd',
         'Midair\Goodreads' => ROOTPATH . 'midair/Goodreads',
     ];
