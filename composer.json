@@ -1,5 +1,5 @@
 {
-    "name": "midair",
+    "name": "matthewpennell/midair",
     "description": "Personal content aggregation, storage and display.",
     "license": "GPL-3.0",
     "type": "project",
@@ -8,6 +8,7 @@
         "php": "^8.1",
         "ext-intl": "*",
         "ext-mbstring": "*",
+        "jwilsson/spotify-web-api-php": "^6.2",
         "laminas/laminas-escaper": "^2.13",
         "psr/log": "^3.0"
     },

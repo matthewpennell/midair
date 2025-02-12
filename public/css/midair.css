@@ -41,6 +41,10 @@ p.npf_quote {
     margin-bottom: 0;
 }
 
+.spotify img {
+    border: 5px solid #fff;
+}
+
 .read-more {
     margin-top: -15px;
 }

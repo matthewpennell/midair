@@ -48,6 +48,7 @@ class Autoload extends AutoloadConfig
         'Midair\Commonplace' => ROOTPATH . 'midair/Commonplace',
         'Midair\Medium' => ROOTPATH . 'midair/Medium',
         'Midair\Strava' => ROOTPATH . 'midair/Strava',
+        'Midair\Spotify' => ROOTPATH . 'midair/Spotify',
         'Midair\Letterboxd' => ROOTPATH . 'midair/Letterboxd',
         'Midair\Goodreads' => ROOTPATH . 'midair/Goodreads',
     ];
