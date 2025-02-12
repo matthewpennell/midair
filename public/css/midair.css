@@ -36,6 +36,11 @@ p, ul, ol {
     margin: 0 0 30px;
 }
 
+p.npf_quote {
+    font-size: 30px;
+    margin-bottom: 0;
+}
+
 .read-more {
     margin-top: -15px;
 }
