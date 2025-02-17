@@ -7,5 +7,5 @@
         <a href="<?= $data->source ?>" class="permalink" target="_blank"><span class="material-symbols-outlined">link</span></a>
     </div>
     <img src="<?= $data->url ?>" width="150" height="150" />
-    <p><strong><?= $data->title ?> by <?= $data->excerpt ?> (from the album <em><?= $data->content ?></em>)</p>
+    <p><strong><?= $data->title ?></strong> by <?= $data->excerpt ?> (from the album <em><?= $data->content ?></em>)</p>
 </article>
