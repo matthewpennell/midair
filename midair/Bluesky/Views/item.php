@@ -7,7 +7,9 @@
         &bull;
         <time datetime="<?= $data->date ?>"><?= date('jS M Y', strtotime($data->date)) ?></time>
         &bull;
-        <a href="<?= $data->source ?>" class="permalink" target="_blank"><span class="material-symbols-outlined">link</span></a>
+        <a href="/bluesky/<?= $data->url ?>" class="permalink"><span class="material-symbols-outlined">link</span></a>
+        &bull;
+        <a href="<?= $data->source ?>" class="external" target="_blank"><span class="material-symbols-outlined">open_in_new</span></a>
     </div>
-    <p><?= str_replace("\n", "<br />", $data->excerpt) ?></p>
+    <p><?= str_replace("\n", "<br>", $data->excerpt) ?></p>
 </article>

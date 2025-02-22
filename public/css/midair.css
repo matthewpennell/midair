@@ -50,6 +50,7 @@ p.npf_quote {
 }
 
 a.permalink:hover, a.permalink:focus,
+a.external:hover, a.external:focus,
 h2 a:hover, h2 a:focus,
 .read-more a:hover, .read-more a:focus,
 #article a:hover, #article a:focus {
@@ -100,9 +101,11 @@ article {
     margin-bottom: 15px;
 }
 
-.meta svg {
+.meta svg,
+.meta .source-icon {
     position: absolute;
     left: -30px;
+    border: 0;
 }
 
 .ma-type {
@@ -111,6 +114,22 @@ article {
 
 .ma-type.bluesky {
     color: #0085FF;
+}
+
+.ma-type.spotify {
+    color: #1DB954;
+}
+
+.ma-type.strava {
+    color: #FC4C02;
+}
+
+.ma-type.goodreads {
+    color: #825445;
+}
+
+.ma-type.letterboxd {
+    color: #202830;
 }
 
 .ma-type.article {
@@ -124,6 +143,12 @@ article {
 .meta .permalink span {
     line-height: 20px;
     font-size: 20px;
+    vertical-align: text-bottom;
+}
+
+.meta .external span {
+    font-size: 17px;
+    line-height: 20px;
     vertical-align: text-bottom;
 }
 
@@ -155,6 +180,12 @@ article {
 
 .review iframe[id*="youtube"] {
     height: 427px;
+}
+
+.spotify .item {
+    display: flex;
+    align-items: start;
+    gap: 15px;
 }
 
 /* View transitions */

@@ -43,7 +43,8 @@ class Import extends BaseController {
             if (empty($existingGoodreads) && strpos($item->guid, 'Review') === 0) {
 
                 // If the entry doesn't exist, insert it into the database.
-                $title = (string) $item->title;
+                preg_match("/'(.+)'/", $item->title, $matches);
+                $title = $matches[1] ?? '';
                 $link = (string) $item->link;
                 $description = (string) $item->description;
                 $author = (string) $item->author;

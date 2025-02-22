@@ -4,7 +4,7 @@
         &bull;
         <time datetime="<?= $data->date ?>"><?= date('jS M Y', strtotime($data->date)) ?></time>
         &bull;
-        <a href="<?= $data->source ?>" class="permalink" target="_blank"><span class="material-symbols-outlined">link</span></a>
+        <a href="/commonplace/<?= $data->url ?>" class="permalink"><span class="material-symbols-outlined">link</span></a>
     </div>
     <?= $data->content ?>
 </article>
