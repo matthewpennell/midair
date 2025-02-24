@@ -1,6 +1,6 @@
 <?php
 
-namespace Midair\Article\Controllers;
+namespace Midair\Blog\Controllers;
 
 use App\Controllers\BaseController;
 
@@ -21,17 +21,17 @@ class Display extends BaseController
        $offset = ($p * $per_page) - $per_page;
 
        // Retrieve all entries from the relevant table.
-       $items = $MidairModel->asObject()->where('type', 'article')->orderBy('date', 'DESC')->limit($per_page, $offset)->findAll();
+       $items = $MidairModel->asObject()->where('type', 'blog')->orderBy('date', 'DESC')->limit($per_page, $offset)->findAll();
 
        // Build the HTML output of the items feed.
        $content = '';
        foreach ($items as $item)
        {
-           $content .= view('Midair\Article\Views\item', [
+           $content .= view('Midair\Blog\Views\item', [
                'data' => $item,
            ], [
                'cache' => 60,
-               'cache_name' => 'Article-item-' . $item->id,
+               'cache_name' => 'Blog-item-' . $item->id,
            ]);
        }
 
@@ -39,7 +39,7 @@ class Display extends BaseController
        $view = ($p > 1) ? 'page' : 'content';
        return view($view, [
             'content' => $content,
-            'title' => 'Articles',
+            'title' => 'Blogs',
             'show_next' => count($items),
             'next_page' => $p + 1,
        ]);
@@ -49,23 +49,23 @@ class Display extends BaseController
     {
        // Connect to the database and instantiate the relevant models.
        $db = db_connect();
-       $ArticleModel = new \Midair\Article\Models\Article();
+       $BlogModel = new \Midair\Blog\Models\Blog();
 
-       // Retrieve the article from the database.
-       $article = $ArticleModel->asObject()->like('link', env('article.rss_link_root') . $url)->first();
+       // Retrieve the blog from the database.
+       $blog = $BlogModel->asObject()->like('link', env('blog.rss_link_root') . $url)->first();
 
-        // If the article doesn't exist, throw a 404 error.
-        if (empty($article)) {
+        // If the blog doesn't exist, throw a 404 error.
+        if (empty($blog)) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException();
         }
 
         // Load the main content view and pass in the data.
-        return view('Midair\Article\Views\single', [
-            'data' => $article,
-            'title' => $article->title,
+        return view('Midair\Blog\Views\single', [
+            'data' => $blog,
+            'title' => $blog->title,
         ], [
             'cache' => 60,
-            'cache_name' => 'Article-single-' . $article->id,
+            'cache_name' => 'Blog-single-' . $blog->id,
         ]);
     }
 }

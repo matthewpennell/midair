@@ -3,7 +3,7 @@
 <?= $this->section('title') ?><?= $title ?><?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-    <div id="article">
+    <div id="blog">
         <h1><?= $data->title ?></h1>
         <?= $data->content ?>
     </div>

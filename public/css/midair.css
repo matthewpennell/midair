@@ -54,7 +54,7 @@ a.permalink:hover, a.permalink:focus,
 a.external:hover, a.external:focus,
 h2 a:hover, h2 a:focus,
 .read-more a:hover, .read-more a:focus,
-#article a:hover, #article a:focus {
+#blog a:hover, #blog a:focus {
     text-decoration: none;
     color: #C03374;
 }
@@ -84,7 +84,7 @@ main::before {
     right: 90px;
 }
 
-#article img {
+#blog img {
     border: 15px solid #fff;
     max-width: 100%;
     display: block;

@@ -1,13 +1,13 @@
 <?php
 
-namespace Midair\Article\Database\Migrations;
+namespace Midair\Blog\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateArticle extends Migration
+class CreateBlog extends Migration
 {
     /**
-     * Create a table to hold articles pulled from an RSS feed.
+     * Create a table to hold blogs pulled from an RSS feed.
      * Field names are based on the RSS 2.0 spec: https://www.rssboard.org/rss-specification#hrelementsOfLtitemgt
      * For now the <category> elements are all combined to form a single <categories> field.
      */
@@ -61,11 +61,11 @@ class CreateArticle extends Migration
         $this->forge->addPrimaryKey('id');
         $this->forge->addKey('pubDate');
         $this->forge->addUniqueKey('link');
-        $this->forge->createTable('articles');
+        $this->forge->createTable('blog');
     }
 
     public function down()
     {
-        $this->forge->dropTable('articles');
+        $this->forge->dropTable('blog');
     }
 }

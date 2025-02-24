@@ -1,12 +1,12 @@
 <?php
 
-namespace Midair\Article\Models;
+namespace Midair\Blog\Models;
 
 use CodeIgniter\Model;
 
-class Article extends Model
+class Blog extends Model
 {
-    protected $table      = 'articles';
+    protected $table      = 'blog';
     protected $primaryKey = 'id';
     protected $allowedFields = ['title', 'link', 'description', 'author', 'categories', 'guid', 'pubDate', 'content'];
 

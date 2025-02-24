@@ -1,19 +1,19 @@
 <?php
 
-namespace Midair\Article\Controllers;
+namespace Midair\Blog\Controllers;
 
 use App\Controllers\BaseController;
 
 class Import extends BaseController {
 
     /**
-     * Import articles from RSS feed.
+     * Import blogs from RSS feed.
      */
     public function index() {
 
         // Get the RSS feed URL from the environment variables.
         // Throw an error if it's not set.
-        $rss_feed_url = env('article.rss_feed_url');
+        $rss_feed_url = env('blog.rss_feed_url');
         if (!$rss_feed_url) {
             throw new \Exception('RSS feed URL not set in environment variables.');
             return;
@@ -28,19 +28,19 @@ class Import extends BaseController {
 
         // Connect to the database and instantiate the relevant models.
         $db = db_connect();
-        $ArticleModel = new \Midair\Article\Models\Article();
+        $BlogModel = new \Midair\Blog\Models\Blog();
         $MidairModel = new \App\Models\Midair();
-        $newArticlesCount = 0;
+        $newBlogsCount = 0;
 
         // Loop through the RSS feed items and save them to the database.
         foreach ($rss->channel->item as $item) {
 
-            // Check whether this article already exists in the database.
-            $existingArticle = $ArticleModel->where('guid', $item->guid)->first();
+            // Check whether this blog already exists in the database.
+            $existingBlog = $BlogModel->where('guid', $item->guid)->first();
 
-            if (empty($existingArticle)) {
+            if (empty($existingBlog)) {
 
-                // If the article doesn't exist, insert it into the database.
+                // If the blog doesn't exist, insert it into the database.
                 $title = (string) $item->title;
                 $link = (string) $item->link;
                 $description = (string) $item->description;
@@ -68,31 +68,31 @@ class Import extends BaseController {
                     'content' => $content,
                 );
 
-                $ArticleModel->insert($data);
-                $newArticlesCount++;
-                log_message('info', 'Inserted new article: ' . $title);
+                $BlogModel->insert($data);
+                $newBlogsCount++;
+                log_message('info', 'Inserted new blog: ' . $title);
 
-                // Insert the new article into the main site stream table.
+                // Insert the new blog into the main site stream table.
                 $data = array(
                     'date' => date('Y-m-d H:i:s', strtotime($pubDate)),
                     'title' => $title,
-                    'url' => str_replace([env('article.rss_link_root'), '/'], ['', ''], $link), // strip the root URL and trailing slash
+                    'url' => str_replace([env('blog.rss_link_root'), '/'], ['', ''], $link), // strip the root URL and trailing slash
                     'source' => $link,
                     'excerpt' => $description,
                     'content' => $content,
-                    'type' => 'article',
+                    'type' => 'blog',
                 );
 
                 $MidairModel->insert($data);
 
-                log_message('info', 'Inserted new article into main stream table.');
+                log_message('info', 'Inserted new blog into main stream table.');
 
             }
 
         }
 
-        log_message('info', "Import completed - added $newArticlesCount new articles.");
-        echo "Import completed - added $newArticlesCount new articles.";
+        log_message('info', "Import completed - added $newBlogsCount new blogs.");
+        echo "Import completed - added $newBlogsCount new blogs.";
 
     }
 
