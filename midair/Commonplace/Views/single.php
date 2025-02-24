@@ -1,5 +1,7 @@
 <?= $this->extend('default') ?>
 
+<?= $this->section('title') ?><?= $title ?><?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
     <article class="commonplace">
         <div class="meta">

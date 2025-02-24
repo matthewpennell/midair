@@ -37,6 +37,7 @@ class Home extends BaseController
         $view = ($p > 1) ? 'page' : 'content';
         return view($view, [
             'content' => $content,
+            'title' => 'Matthew Pennell',
             'show_next' => count($items),
             'next_page' => $p + 1,
         ]);

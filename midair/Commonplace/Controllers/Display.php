@@ -61,6 +61,7 @@ class Display extends BaseController
         // Load the main content view and pass in the data.
         return view('Midair\Commonplace\Views\single', [
             'data' => $commonplace,
+            'title' => $commonplace->title,
         ], [
             'cache' => 60,
             'cache_name' => 'Commonplace-single-' . $commonplace->id,

@@ -39,6 +39,7 @@ class Display extends BaseController
         $view = ($p > 1) ? 'page' : 'content';
         return view($view, [
             'content' => $content,
+            'title' => 'Bluesky posts',
             'show_next' => count($items),
             'next_page' => $p + 1,
         ]);
@@ -61,6 +62,7 @@ class Display extends BaseController
         // Load the main content view and pass in the data.
         return view('Midair\Bluesky\Views\single', [
             'data' => $bluesky,
+            'title' => 'Bluesky post from ' . date('jS M Y', strtotime($bluesky->pubDate)),
         ], [
             'cache' => 60,
             'cache_name' => 'Bluesky-single-' . $bluesky->id,

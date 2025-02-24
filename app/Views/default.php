@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>matthewpennell.com</title>
+        <title><?= $this->renderSection('title') ?> | matthewpennell.com</title>
         <meta name="description" content="">
 
         <meta property="og:title" content="">
@@ -22,6 +22,14 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=link,open_in_new" />
         <link rel="stylesheet" href="/css/midair.css?v=<?= filemtime($_SERVER['DOCUMENT_ROOT'] . '/css/midair.css') ?>">
         <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YRPVEZTZH7"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-YRPVEZTZH7');
+        </script>
     </head>
     <body hx-boost="true">
         <main>

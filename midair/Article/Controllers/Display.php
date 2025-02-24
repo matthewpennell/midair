@@ -38,9 +38,10 @@ class Display extends BaseController
        // Load the main content view and pass in the data.
        $view = ($p > 1) ? 'page' : 'content';
        return view($view, [
-           'content' => $content,
-           'show_next' => count($items),
-           'next_page' => $p + 1,
+            'content' => $content,
+            'title' => 'Articles',
+            'show_next' => count($items),
+            'next_page' => $p + 1,
        ]);
     }
 
@@ -61,6 +62,7 @@ class Display extends BaseController
         // Load the main content view and pass in the data.
         return view('Midair\Article\Views\single', [
             'data' => $article,
+            'title' => $article->title,
         ], [
             'cache' => 60,
             'cache_name' => 'Article-single-' . $article->id,
