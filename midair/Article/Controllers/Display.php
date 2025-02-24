@@ -8,29 +8,40 @@ class Display extends BaseController
 {
     public function index(): string
     {
-        // Connect to the database.
-        $db = db_connect();
-        $MidairModel = new \App\Models\Midair();
+       // Connect to the database.
+       $db = db_connect();
+       $MidairModel = new \App\Models\Midair();
 
-        // Retrieve all entries from the relevant table.
-        $items = $MidairModel->asObject()->orderBy('date', 'DESC')->findAll();
+       // Check for a page query parameter.
+       $p = (int) $this->request->getGet('p');
+       if (! $p) {
+           $p = 1;
+       }
+       $per_page = 10;
+       $offset = ($p * $per_page) - $per_page;
 
-        // Build the HTML output of the items feed.
-        $content = '';
-        foreach ($items as $item)
-        {
-            $content .= view('Midair\\' . ucfirst($item->type) . '\Views\item', [
-                'data' => $item,
-            ], [
-                'cache' => 60,
-                'cache_name' => ucfirst($item->type) . '-item-' . $item->id,
-            ]);
-        }
+       // Retrieve all entries from the relevant table.
+       $items = $MidairModel->asObject()->where('type', 'article')->orderBy('date', 'DESC')->limit($per_page, $offset)->findAll();
 
-        // Load the main content view and pass in the data.
-        return view('content', [
-            'content' => $content,
-        ]);
+       // Build the HTML output of the items feed.
+       $content = '';
+       foreach ($items as $item)
+       {
+           $content .= view('Midair\Article\Views\item', [
+               'data' => $item,
+           ], [
+               'cache' => 60,
+               'cache_name' => 'Article-item-' . $item->id,
+           ]);
+       }
+
+       // Load the main content view and pass in the data.
+       $view = ($p > 1) ? 'page' : 'content';
+       return view($view, [
+           'content' => $content,
+           'show_next' => count($items),
+           'next_page' => $p + 1,
+       ]);
     }
 
     public function single($url = ''): string
