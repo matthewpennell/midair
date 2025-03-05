@@ -51,8 +51,10 @@ class Display extends BaseController
        $db = db_connect();
        $BlogModel = new \Midair\Blog\Models\Blog();
 
-       // Retrieve the blog from the database.
-       $blog = $BlogModel->asObject()->like('link', env('blog.rss_link_root') . $url)->first();
+       // Retrieve the blog entry from the database.
+       $sql = 'SELECT * FROM blog WHERE link REGEXP ?';
+       $pattern = '^' . env('blog.rss_link_root') . '[0-9]{4}/[0-9]{2}/[0-9]{2}/' . $url . '/$';
+       $blog = $db->query($sql, [$pattern])->getRow();
 
         // If the blog doesn't exist, throw a 404 error.
         if (empty($blog)) {

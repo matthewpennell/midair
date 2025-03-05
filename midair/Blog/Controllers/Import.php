@@ -72,11 +72,15 @@ class Import extends BaseController {
                 $newBlogsCount++;
                 log_message('info', 'Inserted new blog: ' . $title);
 
+                // Extract the post name from a standard Wordpress post URL.
+                $pattern = "/^https?:\/\/[^\/]+\/\d{4}\/\d{2}\/\d{2}\/([^\/]+)\/?$/";
+                preg_match($pattern, $link, $matches);
+
                 // Insert the new blog into the main site stream table.
                 $data = array(
                     'date' => date('Y-m-d H:i:s', strtotime($pubDate)),
                     'title' => $title,
-                    'url' => str_replace([env('blog.rss_link_root'), '/'], ['', ''], $link), // strip the root URL and trailing slash
+                    'url' => $matches[1],
                     'source' => $link,
                     'excerpt' => $description,
                     'content' => $content,
