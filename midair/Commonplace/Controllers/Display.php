@@ -30,7 +30,7 @@ class Display extends BaseController
            $content .= view('Midair\Commonplace\Views\item', [
                'data' => $item,
            ], [
-               'cache' => 60,
+               'cache' => 3600, // cache view for 1 hour
                'cache_name' => 'Commonplace-item-' . $item->id,
            ]);
        }
@@ -63,7 +63,7 @@ class Display extends BaseController
             'data' => $commonplace,
             'title' => $commonplace->title,
         ], [
-            'cache' => 60,
+            'cache' => 3600, // cache view for 1 hour
             'cache_name' => 'Commonplace-single-' . $commonplace->id,
         ]);
     }

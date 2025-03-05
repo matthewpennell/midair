@@ -30,7 +30,7 @@ class Display extends BaseController
             $content .= view('Midair\Bluesky\Views\item', [
                 'data' => $item,
             ], [
-                'cache' => 60,
+                'cache' => 3600, // cache view for 1 hour
                 'cache_name' => 'Bluesky-item-' . $item->id,
             ]);
         }
@@ -64,7 +64,7 @@ class Display extends BaseController
             'data' => $bluesky,
             'title' => 'Bluesky post from ' . date('jS M Y', strtotime($bluesky->pubDate)),
         ], [
-            'cache' => 60,
+            'cache' => 3600, // cache view for 1 hour
             'cache_name' => 'Bluesky-single-' . $bluesky->id,
         ]);
     }

@@ -28,7 +28,7 @@ class Home extends BaseController
             $content .= view('Midair\\' . ucfirst($item->type) . '\Views\item', [
                 'data' => $item,
             ], [
-                'cache' => 60,
+                'cache' => 3600, // cache view for 1 hour
                 'cache_name' => ucfirst($item->type) . '-item-' . $item->id,
             ]);
         }

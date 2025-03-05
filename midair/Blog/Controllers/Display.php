@@ -30,7 +30,7 @@ class Display extends BaseController
            $content .= view('Midair\Blog\Views\item', [
                'data' => $item,
            ], [
-               'cache' => 60,
+               'cache' => 3600, // cache view for 1 hour
                'cache_name' => 'Blog-item-' . $item->id,
            ]);
        }
@@ -66,7 +66,7 @@ class Display extends BaseController
             'data' => $blog,
             'title' => $blog->title,
         ], [
-            'cache' => 60,
+            'cache' => 3600, // cache view for 1 hour
             'cache_name' => 'Blog-single-' . $blog->id,
         ]);
     }
