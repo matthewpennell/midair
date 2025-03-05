@@ -38,6 +38,7 @@ class Home extends BaseController
         return view($view, [
             'content' => $content,
             'title' => 'Matthew Pennell',
+            'description' => '',
             'show_next' => count($items),
             'next_page' => $p + 1,
         ]);

@@ -1,4 +1,4 @@
-<blog class="blog">
+<article class="blog">
     <div class="meta">
         <span class="ma-type blog">Blog</span>
         &bull;
@@ -13,4 +13,4 @@
     </h2>
     <p><?= $data->excerpt ?></p>
     <p class="read-more"><a href="/blog/<?= $data->url ?>">Read full blog post</a></p>
-</blog>
+</article>

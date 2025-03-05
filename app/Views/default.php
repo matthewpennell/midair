@@ -6,11 +6,11 @@
         <title><?= $this->renderSection('title') ?> | matthewpennell.com</title>
         <meta name="description" content="">
 
-        <meta property="og:title" content="">
-        <meta property="og:type" content="">
-        <meta property="og:url" content="">
-        <meta property="og:image" content="">
-        <meta property="og:image:alt" content="">
+        <meta property="og:title" content="<?= $this->renderSection('og-title') ?>">
+        <meta property="og:type" content="<?= $this->renderSection('type') ?>">
+        <meta property="og:url" content="<?= (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://" . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') ?>">
+        <meta property="og:site_name" content="matthewpennell.com" />
+        <meta property="og:description" content="<?= $this->renderSection('description') ?>" />
 
         <link rel="icon" href="/favicon.ico" sizes="any">
         <link rel="icon" href="/icon.svg" type="image/svg+xml">

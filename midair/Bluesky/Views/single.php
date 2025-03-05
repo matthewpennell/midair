@@ -1,6 +1,9 @@
 <?= $this->extend('default') ?>
 
-<?= $this->section('title') ?><?= $title ?><?= $this->endSection() ?>
+<?= $this->section('title') ?>Bluesky post from <?= date('jS M Y', strtotime($data->pubDate)) ?><?= $this->endSection() ?>
+<?= $this->section('og-title') ?>Bluesky post from <?= date('jS M Y', strtotime($data->pubDate)) ?><?= $this->endSection() ?>
+<?= $this->section('type') ?>article<?= $this->endSection() ?>
+<?= $this->section('description') ?><?= $data->description ?><?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
     <article class="bluesky">
