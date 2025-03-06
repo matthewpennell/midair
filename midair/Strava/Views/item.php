@@ -2,10 +2,10 @@
     <div class="meta">
         <img class="source-icon" src="/images/strava.svg" width="20" height="20" alt="" />
         <span class="ma-type strava">Strava</span>
-        &bull;
+        <span aria-hidden="true">&bull;</span>
         <time datetime="<?= $data->date ?>"><?= date('jS M Y', strtotime($data->date)) ?></time>
-        &bull;
-        <a href="<?= $data->source ?>" class="external" target="_blank"><span class="material-symbols-outlined">open_in_new</span></a>
+        <span aria-hidden="true">&bull;</span>
+        <a href="<?= $data->source ?>" class="external" target="_blank" aria-label="Open Strava activity in new tab"><span class="material-symbols-outlined">open_in_new</span></a>
     </div>
     <p><?= str_replace(', ', '<br />', $data->content) ?></p>
     <p class="read-more"><a href="<?= $data->source ?>" target="_blank">View &lsquo;<?= $data->title ?>&rsquo; on Strava</a></p>

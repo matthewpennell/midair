@@ -1,10 +1,10 @@
 <article class="blog">
     <div class="meta">
         <span class="ma-type blog">Blog</span>
-        &bull;
+        <span aria-hidden="true">&bull;</span>
         <time datetime="<?= $data->date ?>"><?= date('jS M Y', strtotime($data->date)) ?></time>
-        &bull;
-        <a href="/blog/<?= $data->url ?>" class="permalink"><span class="material-symbols-outlined">link</span></a>
+        <span aria-hidden="true">&bull;</span>
+        <a href="/blog/<?= $data->url ?>" class="permalink" aria-label="Permalink"><span class="material-symbols-outlined">link</span></a>
     </div>
     <h2>
         <a href="/blog/<?= $data->url ?>">

@@ -9,7 +9,7 @@
     <article class="commonplace">
         <div class="meta">
             <span class="ma-type commonplace">Commonplace</span>
-            &bull;
+            <span aria-hidden="true">&bull;</span>
             <time datetime="<?= $data->pubDate ?>"><?= date('jS M Y', strtotime($data->pubDate)) ?></time>
         </div>
         <?= $data->content ?>
