@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><?= $this->renderSection('title') ?> | matthewpennell.com</title>
-        <meta name="description" content="">
+        <meta name="description" content="UK-based UX designer and developer with over two decades of experience and a passion for writing, music, and gaming.">
 
         <meta property="og:title" content="<?= $this->renderSection('og-title') ?>">
         <meta property="og:type" content="<?= $this->renderSection('type') ?>">
