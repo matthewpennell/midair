@@ -30,8 +30,20 @@
             gtag('js', new Date());
             gtag('config', 'G-YRPVEZTZH7');
         </script>
+        <script>
+            document.addEventListener('htmx:afterRequest', function(event) {
+                var announceDiv = document.getElementById('announce');
+                var message = document.createElement('div');
+                message.textContent = 'New content has been loaded below.';
+                announceDiv.appendChild(message);
+                setTimeout(function() {
+                    announceDiv.removeChild(message);
+                }, 2000); // remove the message after 2 seconds
+            });
+        </script>
     </head>
     <body hx-boost="true">
+        <div id="announce" aria-live="polite"></div>
         <main>
             <?= $this->renderSection('content') ?>
         </main>

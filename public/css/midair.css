@@ -84,6 +84,15 @@ main::before {
     right: 90px;
 }
 
+#announce {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+}
+
 #blog img {
     border: 15px solid #fff;
     max-width: 100%;
