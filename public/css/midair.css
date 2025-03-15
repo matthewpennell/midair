@@ -69,9 +69,19 @@ main {
     main {
         padding: 0 15px;
     }
-    .meta svg {
+    .meta svg,
+    .meta img {
         display: none;
     }
+}
+
+#logo {
+    position: absolute;
+    top: -29px;
+    left: -10px;
+    width: 115px;
+    height: 115px;
+    opacity: 0.1;
 }
 
 main::before {
