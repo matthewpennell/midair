@@ -21,7 +21,7 @@ class Display extends BaseController
         $offset = ($p * $per_page) - $per_page;
 
         // Retrieve all entries from the relevant table.
-        $items = $MidairModel->asObject()->where('type', 'bluesky')->orderBy('date', 'DESC')->limit($per_page, $offset)->findAll();
+        $items = $MidairModel->asObject()->where('status', 'published')->where('type', 'bluesky')->orderBy('date', 'DESC')->limit($per_page, $offset)->findAll();
 
         // Build the HTML output of the items feed.
         $content = '';
@@ -40,6 +40,7 @@ class Display extends BaseController
         return view($view, [
             'content' => $content,
             'title' => 'Bluesky posts',
+            'description' => 'Things that I have posted on Bluesky over the years.',
             'show_next' => count($items),
             'next_page' => $p + 1,
         ]);

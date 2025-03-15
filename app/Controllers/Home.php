@@ -19,7 +19,7 @@ class Home extends BaseController
         $offset = ($p * $per_page) - $per_page;
 
         // Retrieve the relevant page of entries from the relevant table.
-        $items = $MidairModel->asObject()->orderBy('date', 'DESC')->limit($per_page, $offset)->findAll();
+        $items = $MidairModel->asObject()->where('status', 'published')->orderBy('date', 'DESC')->limit($per_page, $offset)->findAll();
 
         // Build the HTML output of the items feed.
         $content = '';

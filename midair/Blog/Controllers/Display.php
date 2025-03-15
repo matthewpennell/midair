@@ -21,7 +21,7 @@ class Display extends BaseController
        $offset = ($p * $per_page) - $per_page;
 
        // Retrieve all entries from the relevant table.
-       $items = $MidairModel->asObject()->where('type', 'blog')->orderBy('date', 'DESC')->limit($per_page, $offset)->findAll();
+       $items = $MidairModel->asObject()->where('type', 'blog')->where('status', 'published')->orderBy('date', 'DESC')->limit($per_page, $offset)->findAll();
 
        // Build the HTML output of the items feed.
        $content = '';
@@ -39,7 +39,8 @@ class Display extends BaseController
        $view = ($p > 1) ? 'page' : 'content';
        return view($view, [
             'content' => $content,
-            'title' => 'Blogs',
+            'title' => 'Blog posts',
+            'description' => 'Published blog posts, in reverse chronological order.',
             'show_next' => count($items),
             'next_page' => $p + 1,
        ]);
