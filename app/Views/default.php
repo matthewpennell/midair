@@ -44,7 +44,7 @@
     </head>
     <body hx-boost="true">
         <div id="announce" aria-live="polite"></div>
-        <img src="/images/mp.svg" alt="matthewpennell.com" id="logo">
+        <a href="/"><img src="/images/mp.svg" alt="matthewpennell.com" id="logo"></a>
         <main>
             <?= $this->renderSection('content') ?>
         </main>
