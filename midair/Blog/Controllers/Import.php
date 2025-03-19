@@ -96,8 +96,10 @@ class Import extends BaseController {
         }
 
         log_message('info', "Import completed - added $newBlogsCount new blogs.");
-        echo "Import completed - added $newBlogsCount new blogs.";
-
+        if ($newBlogsCount > 0) {
+            echo "$newBlogsCount new blog articles imported.\n";
+        }
+ 
     }
 
 }

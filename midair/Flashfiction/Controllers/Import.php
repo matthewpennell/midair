@@ -99,7 +99,9 @@ class Import extends BaseController {
         }
 
         log_message('info', "Import completed - added $newFlashfictionsCount new flash fictions.");
-        echo "Import completed - added $newFlashfictionsCount new flash fictions.";
+        if ($newFlashfictionsCount > 0) {
+            echo "$newFlashfictionsCount new flash fiction stories imported.\n";
+        }
 
     }
 

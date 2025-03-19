@@ -91,7 +91,9 @@ class Import extends BaseController {
         }
 
         log_message('info', "Import completed - added $newBlueskysCount new skeets.");
-        echo "Import completed - added $newBlueskysCount new skeets.";
+        if ($newBlueskysCount > 0) {
+            echo "$newBlueskysCount new Bluesky posts imported.\n";
+        }
 
     }
 

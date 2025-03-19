@@ -99,7 +99,9 @@ class Import extends BaseController {
         }
 
         log_message('info', "Import completed - added $newSpotifysCount new tracks.");
-        echo "Import completed - added $newSpotifysCount new tracks.";
+        if ($newSpotifysCount > 0) {
+            echo "$newSpotifysCount new Spotify favourite tracks imported.\n";
+        }
 
     }
 

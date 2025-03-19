@@ -100,7 +100,9 @@ class Import extends BaseController {
         }
 
         log_message('info', "Import completed - added $newStravasCount new entries.");
-        echo "Import completed - added $newStravasCount new entries.";
+        if ($newStravasCount > 0) {
+            echo "$newStravasCount new Strava workouts imported.\n";
+        }
 
     }
 

@@ -99,7 +99,9 @@ class Import extends BaseController {
         }
 
         log_message('info', "Import completed - added $newCommonplacesCount new commonplace items.");
-        echo "Import completed - added $newCommonplacesCount new commonplace items.";
+        if ($newCommonplacesCount > 0) {
+            echo "$newCommonplacesCount new commonplace entries imported.\n";
+        }
 
     }
 

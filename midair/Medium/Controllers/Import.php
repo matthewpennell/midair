@@ -97,7 +97,9 @@ class Import extends BaseController {
         }
 
         log_message('info', "Import completed - added $newMediumsCount new Medium items.");
-        echo "Import completed - added $newMediumsCount new Medium items.";
+        if ($newMediumsCount > 0) {
+            echo "$newMediumsCount new Medium.com articles imported.\n";
+        }
 
     }
 

@@ -102,7 +102,9 @@ class Import extends BaseController {
         }
 
         log_message('info', "Import completed - added $newGoodreadssCount new entries.");
-        echo "Import completed - added $newGoodreadssCount new entries.";
+        if ($newGoodreadssCount > 0) {
+            echo "$newGoodreadssCount new Goodreads reviews imported.\n";
+        }
 
     }
 

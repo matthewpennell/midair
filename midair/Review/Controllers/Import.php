@@ -99,7 +99,9 @@ class Import extends BaseController {
         }
 
         log_message('info', "Import completed - added $newReviewsCount new reviews.");
-        echo "Import completed - added $newReviewsCount new reviews.";
+        if ($newReviewsCount > 0) {
+            echo "$newReviewsCount new reviews imported.\n";
+        }
 
     }
 

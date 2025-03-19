@@ -100,7 +100,9 @@ class Import extends BaseController {
         }
 
         log_message('info', "Import completed - added $newLetterboxdsCount new entries.");
-        echo "Import completed - added $newLetterboxdsCount new entries.";
+        if ($newLetterboxdsCount > 0) {
+            echo "$newLetterboxdsCount new Letterboxd entries imported.\n";
+        }
 
     }
 
