@@ -10,4 +10,5 @@
         <h1><?= $data->title ?></h1>
         <?= $data->content ?>
     </div>
+    <a href="/" class="back">Go back</a>
 <?= $this->endSection() ?>

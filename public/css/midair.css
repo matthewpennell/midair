@@ -3,7 +3,7 @@ body {
     background: rgba(3, 55, 70, 0.05);
     color: #000;
     font: 20px/1.5 "Roboto Serif", serif;
-    padding: 90px 0;
+    padding: 120px 0;
 }
 
 a {
@@ -59,29 +59,31 @@ h2 a:hover, h2 a:focus,
     color: #C03374;
 }
 
+a.back {
+    display: inline-block;
+    margin: 30px auto;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+}
+
+a.back::before {
+    content: "↢";
+    display: inline-block;
+    color: #033746;
+}
+
 main {
     margin: 0 auto;
     max-width: 760px; /* 75 characters per line for 20px Roboto Serif */
 }
 
-/* Add extra padding for mobile devices */
-@media (max-width: 600px) {
-    main {
-        padding: 0 15px;
-    }
-    .meta svg,
-    .meta img {
-        display: none;
-    }
-}
-
 #logo {
     position: absolute;
-    top: -29px;
-    left: -10px;
-    width: 115px;
-    height: 115px;
-    opacity: 0.1;
+    top: 30px;
+    left: 30px;
+    width: 253px;
+    height: 60px;
 }
 
 main::before {
@@ -92,6 +94,23 @@ main::before {
     height: 90px;
     top: 0;
     right: 90px;
+}
+
+/* Add extra padding for mobile devices */
+@media (max-width: 600px) {
+    main {
+        padding: 0 15px;
+    }
+    main::before {
+        right: 15px;
+    }
+    #logo {
+        left: 15px;
+    }
+    .meta svg,
+    .meta img {
+        display: none;
+    }
 }
 
 #announce {

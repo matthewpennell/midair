@@ -19,4 +19,5 @@
         </div>
         <p><?= str_replace("\n", "<br />", $data->description) ?></p>
     </article>
+    <a href="/" class="back">Go back</a>
 <?= $this->endSection() ?>

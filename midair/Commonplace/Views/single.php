@@ -14,4 +14,5 @@
         </div>
         <?= $data->content ?>
     </article>
+    <a href="/" class="back">Go back</a>
 <?= $this->endSection() ?>
