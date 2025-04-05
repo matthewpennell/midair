@@ -86,6 +86,13 @@ main {
     height: 60px;
 }
 
+#rss {
+    color: #033746;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}
+
 main::before {
     content: "";
     position: absolute;
