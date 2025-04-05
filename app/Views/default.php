@@ -45,7 +45,7 @@
     <body hx-boost="true">
         <div id="announce" aria-live="polite"></div>
         <a href="/"><img src="/images/mp.png" alt="matthewpennell.com" id="logo"></a>
-        <a href="/rss/blog" id="rss" title="Subscribe to the blog RSS feed" hx-boost="false"><span class="material-symbols-outlined">rss_feed</span></a>
+        <a href="/rss/blog,commonplace,bluesky,flashfiction,medium,review" id="rss" title="Subscribe to the blog-plus-other-bits-of-writing RSS feed" hx-boost="false"><span class="material-symbols-outlined">rss_feed</span></a>
         <main>
             <?= $this->renderSection('content') ?>
         </main>
