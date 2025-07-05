@@ -40,10 +40,15 @@ class Import extends BaseController {
 
             if (empty($existingBluesky)) {
 
+                // Turn valid links into live HTML links.
+                $description = preg_replace('/(https?:\/\/[^\s]+)/', '<a href="$1" target="_blank">$1</a>', $item->description);
+                // Turn valid hashtags into Bluesky search links.
+                $description = preg_replace('/#(\w+)/', '<a href="https://bsky.app/search?q=%23$1" target="_blank">#$1</a>', $description);
+
                 // If the skeet doesn't exist, insert it into the database.
                 $title = (string) $item->title;
                 $link = (string) $item->link;
-                $description = (string) $item->description;
+                $description = (string) $description;
                 $author = (string) $item->author;
                 $creator = (string) $item->children('dc', true)->creator;
                 $guid = (string) $item->guid;
@@ -72,6 +77,12 @@ class Import extends BaseController {
                 $newBlueskysCount++;
                 log_message('info', 'Inserted new skeet: ' . $title);
 
+                // Set the status to published unless there is a link to my own site or embedded (i.e. quoted) content.
+                $status = 'published';
+                if (strpos($description, env('app.baseURL')) !== false || strpos($description, 'contains quote post or other embedded content') !== false) {
+                    $status = 'draft';
+                }
+
                 // Insert the new skeet into the main site stream table.
                 $data = array(
                     'date' => date('Y-m-d H:i:s', strtotime($pubDate)),
@@ -81,6 +92,7 @@ class Import extends BaseController {
                     'excerpt' => $description,
                     'content' => $content,
                     'type' => 'bluesky',
+                    'status' => $status,
                 );
 
                 $MidairModel->insert($data);
