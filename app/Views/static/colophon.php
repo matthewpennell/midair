@@ -21,6 +21,17 @@
                 </p>
 
                 <p>
+                    Speaking of data, this site imports everything I write across three different blogs
+                    (okay, two of them are fairly quiet, but I might pick them up again in the future) plus my Medium.com account;
+                    my Goodreads and Letterboxd reviews; and any additions to my Spotify favourites playlist.
+                    It also pulls in all of my Strava workouts and Bluesky posts as well; currently they're 
+                    not being displayed on the site apart from the latest Bluesky update on the homepage, 
+                    but I might add them in the future. Next on the list of sources I want to include is 
+                    <a href="https://backloggd.com" target="_blank" rel="noopener noreferrer">Backloggd</a>, 
+                    the video game backlog tracker.
+                </p>
+
+                <p>
                     The frontend is written in plain HTML and CSS – the design was simple enough 
                     to not bother with pre-processors, and I hate Tailwind. It uses CSS features 
                     (Grid, Flexbox, Variables) that still feel like recent additions to me even 
