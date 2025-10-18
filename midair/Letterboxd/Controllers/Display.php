@@ -43,8 +43,8 @@ class Display extends BaseController
        $LetterboxdModel = new \Midair\Letterboxd\Models\Letterboxd();
 
        // Retrieve the blog entry from the database.
-       $sql = 'SELECT * FROM letterboxd WHERE guid = ? OR WHERE link LIKE "' . env('letterboxd.rss_link_root') . $url . '%"';
-       $letterboxd = $db->query($sql, [$url])->getRow();
+       $sql = 'SELECT * FROM letterboxd WHERE guid = "' . $url . '" OR link LIKE "' . env('letterboxd.rss_link_root') . $url . '%"';
+       $letterboxd = $db->query($sql)->getRow();
 
         // If the blog doesn't exist, throw a 404 error.
         if (empty($letterboxd)) {
