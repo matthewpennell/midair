@@ -38,7 +38,7 @@ class Import extends BaseController {
 
         // Now request the 25 most recently added tracks.
         $playlistTracks = $api->getPlaylistTracks(env('spotify.playlist_id'), [
-            'fields' => 'items(added_at,track(id,name,artists(name),album(href,images(url),name,external_urls(spotify)))',
+            'fields' => 'items(added_at,track(id,name,artists(name),album(id,href,images(url),name,release_date,external_urls(spotify)))',
             'limit' => 25,
             'offset' => $playlistLength - 25,
         ]);
@@ -58,9 +58,21 @@ class Import extends BaseController {
             if (empty($existingSpotify)) {
 
                 // If the track doesn't exist, insert it into the database.
+
+                // First retrieve the album information from the Spotify API to get the track listing and copyright.
+                $albumDetails = $api->getAlbum($item->track->album->id);
+        
+                $track_listing = '';
+                foreach($albumDetails->tracks->items as $track) {
+                    $track_listing .= $track->name . ', ';
+                }
+                $copyright = $albumDetails->copyrights[0]->text;
+
                 $track = (string) $item->track->name;
                 $artist = (string) $item->track->artists[0]->name;
                 $album = (string) $item->track->album->name;
+                $release_date = (string) $item->track->album->release_date;
+                $tracks = (string) substr($track_listing, 0, -2);
                 $cover = (string) $item->track->album->images[0]->url;
                 $url = (string) $item->track->album->external_urls->spotify;
                 $guid = (string) $item->track->id;
@@ -70,6 +82,9 @@ class Import extends BaseController {
                     'track' => $track,
                     'artist' => $artist,
                     'album' => $album,
+                    'release_date' => $release_date,
+                    'tracks' => $tracks,
+                    'copyright' => $copyright,
                     'cover'=> $cover,
                     'url' => $url,
                     'guid' => $guid,
@@ -84,7 +99,7 @@ class Import extends BaseController {
                 $data = array(
                     'date' => date('Y-m-d H:i:s', strtotime($pubDate)),
                     'title' => $track,
-                    'url' => $cover,
+                    'url' => $guid,
                     'source' => $url,
                     'excerpt' => $artist,
                     'content' => $album,

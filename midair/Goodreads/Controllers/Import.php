@@ -37,29 +37,26 @@ class Import extends BaseController {
         foreach ($rss->channel->item as $item) {
 
             // Check whether this entry already exists in the database.
-            $existingGoodreads = $GoodreadsModel->where('guid', $item->guid)->first();
+            $existingGoodreads = $GoodreadsModel->where('guid', str_replace('Review', '', $item->guid))->first();
 
             // If the entry doesn't exist and it is a review, insert it into the database.
             if (empty($existingGoodreads) && strpos($item->guid, 'Review') === 0) {
 
                 // If the entry doesn't exist, insert it into the database.
-                preg_match("/'(.+)'/", $item->title, $matches);
-                $title = $matches[1] ?? '';
                 $link = (string) $item->link;
-                $description = (string) $item->description;
-                $author = (string) $item->author;
-                $creator = (string) $item->children('dc', true)->creator;
-                $guid = (string) $item->guid;
+                preg_match("/authorName.*>(.+)<\//", $item->description, $matches);
+                $author = $matches[1] ?? '';
+                preg_match("/bookTitle\" href=\"(.+)\"/", $item->description, $matches);
+                $bookUrl = $matches[1] ?? '';
+                $guid = (string) str_replace('Review', '', $item->guid);
                 $pubDate = (string) $item->pubDate;
-                $content = (string) $item->children('content', true)->encoded;
+                preg_match("/(\d) stars/", $item->description, $matches);
+                $rating = $matches[1] ?? '';
 
-                // If there's no content, use the description (which contains the full article)
-                // and create a shorter excerpt from first three sentences.
-                if ($content == '') {
-                    $content = $description;
-                    preg_match_all('/[^.!?]*[.!?]/', strip_tags($content), $matches);
-                    $description = implode(' ', array_slice($matches[0], 0, 3));
-                }
+                // If there's no content, grab the description and chop out the metadata to 
+                // only leave the review (if there is one).
+                preg_match('/<br\/>\s*(.+)/', $item->description, $matches);
+                $description = $matches[1] ?? '';
 
                 // Loop through all <category> elements and create a comma-separated string.
                 $categories = [];
@@ -68,15 +65,59 @@ class Import extends BaseController {
                 }
                 $categoriesString = implode(', ', $categories);
 
+                // Request the review from Goodreads and extract the parts we need to complete the model.
+                $bookReviewPage = file_get_contents($link);
+
+                // Extract the title from the H1.
+                preg_match('/<h1>(.+?)<\/h1>/', $bookReviewPage, $matches);
+                $title = explode(' &gt; ', $matches[1] ?? '');
+                $title = $title[count($title) - 1];
+
+                // Extract the author name from the authorName link.
+                preg_match('/<a[^>]*?class="authorName"[^>]*?>\s*<span[^>]*>([^<]+)<\/span>\s*<\/a>/i', $bookReviewPage, $matches);
+                $author = $matches[1] ?? '';
+
+                // Extract the review from the reviewText div.
+                preg_match('/<div\s+class="[^"]*reviewText[^"]*"\s+[^>]*?>\s*(.+?)\s*<\/div>/is', $bookReviewPage, $matches);
+                $description = $matches[1] ?? '';
+
+                // Grab the rating.
+                preg_match('/<div\s+class="rating"\s+itemprop="reviewRating"[^>]*>\s*<span\s+class="value-title"\s+title="([^"]+)"/', $bookReviewPage, $matches);
+                $rating = $matches[1] ?? '';
+
+                // Now request the actual book page and retrieve the remaining pieces of metadata.
+                preg_match('/<a\s+[^>]*?class="[^"]*\bbookTitle\b[^"]*"[^>]*\bhref="([^"]+)"[^>]*>/i', $bookReviewPage, $matches);
+                $bookUrl = $matches[1] ?? '';
+                $bookDetailPage = file_get_contents('https://www.goodreads.com' . $bookUrl);
+
+                // Pull the image URL out of the JavaScript metadata.
+                preg_match('/"imageUrl":"([^"]+\.(?:jpg|jpeg|png|gif|webp))"/i', $bookDetailPage, $matches);
+                $image = $matches[1] ?? '';
+
+                // Pull the book description out of the JavaScript metadata.
+                preg_match_all('/"description":"((?:[^"\\\]|\\\\.)*)"/i', $bookDetailPage, $matches);
+                $book_description = $matches[1][1] ?? ''; // not sure if this will always be the second match...
+
+                // Pull the publication date out of the JavaScript metadata.
+                if (preg_match('/"publicationTime":(-?\d+)/', $bookDetailPage, $matches)) {
+                    $timestamp = $matches[1] / 1000; // Convert to seconds
+                    $formattedDate = date('F j, Y', $timestamp);
+                }
+                $publication_date = $formattedDate ?? '';
+
                 $data = array(
                     'title' => $title,
                     'link' => $link,
                     'description' => $description,
-                    'author'=> $author ? $author : $creator,
+                    'content' => $description,
+                    'book_description' => $book_description,
+                    'publication_date' => $publication_date,
+                    'image' => $image,
+                    'author'=> $author,
+                    'rating' => $rating,
                     'categories' => $categoriesString,
                     'guid' => $guid,
                     'pubDate' => date('Y-m-d H:i:s', strtotime($pubDate)),
-                    'content' => $content,
                 );
 
                 $GoodreadsModel->insert($data);
@@ -90,7 +131,7 @@ class Import extends BaseController {
                     'url' => str_replace([env('goodreads.rss_link_root'), '/'], ['', ''], $link), // strip the root URL and trailing slash
                     'source' => $link,
                     'excerpt' => $description,
-                    'content' => $content,
+                    'content' => $description,
                     'type' => 'goodreads',
                 );
 

@@ -84,7 +84,7 @@ class Import extends BaseController {
                 $data = array(
                     'date' => date('Y-m-d H:i:s', strtotime($pubDate)),
                     'title' => $title,
-                    'url' => str_replace([env('commonplace.rss_link_root'), '/'], ['', ''], $link), // strip the root URL and trailing slash
+                    'url' => str_replace(env('commonplace.rss_link_root'), '', $link), // strip the root URL
                     'source' => $link,
                     'excerpt' => $description,
                     'content' => $content,

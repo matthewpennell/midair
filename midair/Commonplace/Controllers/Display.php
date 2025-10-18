@@ -6,45 +6,36 @@ use App\Controllers\BaseController;
 
 class Display extends BaseController
 {
-    public function index(): string
+    public $per_page = 10;
+
+    public function index($page = 1): string
     {
-       // Connect to the database.
-       $db = db_connect();
-       $MidairModel = new \App\Models\Midair();
+        // Connect to the database.
+        $db = db_connect();
+        $MidairModel = new \App\Models\Midair();
 
-       // Check for a page query parameter.
-       $p = (int) $this->request->getGet('p');
-       if (! $p) {
-           $p = 1;
-       }
-       $per_page = 10;
-       $offset = ($p * $per_page) - $per_page;
+        // Retrieve a total count of posts to use for pagination calculations.
+        $total_count = $MidairModel->where('status', 'published')->where('type', 'commonplace')->countAllResults();
 
-       // Retrieve all entries from the relevant table.
-       $items = $MidairModel->asObject()->where('type', 'commonplace')->where('status', 'published')->orderBy('date', 'DESC')->limit($per_page, $offset)->findAll();
+        // Calculate the offset for the current page.
+        $offset = ($page - 1) * $this->per_page;
 
-       // Build the HTML output of the items feed.
-       $content = '';
-       foreach ($items as $item)
-       {
-           $content .= view('Midair\Commonplace\Views\item', [
-               'data' => $item,
-           ], [
-               'cache' => 3600, // cache view for 1 hour
-               'cache_name' => 'Commonplace-item-' . $item->id,
-           ]);
-       }
+        // Retrieve the latest entries from the Writing feed.
+        $articles = $MidairModel->asObject()->where('status', 'published')->where('type', 'commonplace')->orderBy('date', 'DESC')->limit($this->per_page)->offset($offset)->findAll();
 
-       // Load the main content view and pass in the data.
-       $view = ($p > 1) ? 'page' : 'content';
-       return view($view, [
-           'content' => $content,
-           'title' => 'Commonplace entries',
-           'description' => 'Notes and links, in reverse chronological order.',
-           'show_next' => count($items),
-           'next_page' => $p + 1,
-       ]);
+        // Load the main content view and pass in the data.
+        return view('consuming', [
+            'title' => 'Commonplace entries',
+            'type' => 'consuming',
+            'search' => 'commonplace',
+            'description' => 'Published commonplace entries, in reverse chronological order.',
+            'articles' => $articles,
+            'total_count' => $total_count,
+            'per_page' => $this->per_page,
+            'page' => $page,
+        ]);
     }
+
 
     public function single($url = ''): string
     {
@@ -53,7 +44,7 @@ class Display extends BaseController
        $CommonplaceModel = new \Midair\Commonplace\Models\Commonplace();
 
        // Retrieve the item from the database.
-       $commonplace = $CommonplaceModel->asObject()->like('link', env('commonplace.rss_link_root') . $url)->first();
+       $commonplace = $CommonplaceModel->asObject()->where('link', env('commonplace.rss_link_root') . $url)->first();
 
         // If the item doesn't exist, throw a 404 error.
         if (empty($commonplace)) {
@@ -64,6 +55,9 @@ class Display extends BaseController
         return view('Midair\Commonplace\Views\single', [
             'data' => $commonplace,
             'title' => $commonplace->title,
+            'description' => $commonplace->description,
+            'type' => 'consuming',
+            'search' => 'commonplace',
         ], [
             'cache' => 3600, // cache view for 1 hour
             'cache_name' => 'Commonplace-single-' . $commonplace->id,

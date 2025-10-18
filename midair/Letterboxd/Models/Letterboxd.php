@@ -8,7 +8,7 @@ class Letterboxd extends Model
 {
     protected $table      = 'letterboxd';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['title', 'link', 'description', 'author', 'categories', 'guid', 'pubDate', 'content'];
+    protected $allowedFields = ['title', 'link', 'description', 'author', 'categories', 'guid', 'pubDate', 'content', 'release_year', 'review', 'rating', 'image'];
 
     // Dates
     protected $useTimestamps = true;

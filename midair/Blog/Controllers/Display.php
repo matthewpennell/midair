@@ -6,44 +6,35 @@ use App\Controllers\BaseController;
 
 class Display extends BaseController
 {
-    public function index(): string
+
+    public $per_page = 10;
+
+    public function index($page = 1): string
     {
-       // Connect to the database.
-       $db = db_connect();
-       $MidairModel = new \App\Models\Midair();
+        // Connect to the database.
+        $db = db_connect();
+        $MidairModel = new \App\Models\Midair();
 
-       // Check for a page query parameter.
-       $p = (int) $this->request->getGet('p');
-       if (! $p) {
-           $p = 1;
-       }
-       $per_page = 10;
-       $offset = ($p * $per_page) - $per_page;
+        // Retrieve a total count of posts to use for pagination calculations.
+        $total_count = $MidairModel->where('status', 'published')->where('type', 'blog')->countAllResults();
 
-       // Retrieve all entries from the relevant table.
-       $items = $MidairModel->asObject()->where('type', 'blog')->where('status', 'published')->orderBy('date', 'DESC')->limit($per_page, $offset)->findAll();
+        // Calculate the offset for the current page.
+        $offset = ($page - 1) * $this->per_page;
 
-       // Build the HTML output of the items feed.
-       $content = '';
-       foreach ($items as $item)
-       {
-           $content .= view('Midair\Blog\Views\item', [
-               'data' => $item,
-           ], [
-               'cache' => 3600, // cache view for 1 hour
-               'cache_name' => 'Blog-item-' . $item->id,
-           ]);
-       }
+        // Retrieve the latest entries from the Writing feed.
+        $articles = $MidairModel->asObject()->where('status', 'published')->where('type', 'blog')->orderBy('date', 'DESC')->limit($this->per_page)->offset($offset)->findAll();
 
-       // Load the main content view and pass in the data.
-       $view = ($p > 1) ? 'page' : 'content';
-       return view($view, [
-            'content' => $content,
-            'title' => 'Blog posts',
-            'description' => 'Published blog posts, in reverse chronological order.',
-            'show_next' => count($items),
-            'next_page' => $p + 1,
-       ]);
+        // Load the main content view and pass in the data.
+        return view('writing', [
+            'title' => 'Blog',
+            'type' => 'writing',
+            'search' => 'blog',
+            'description' => 'The blog archive, containing stuff I\'ve written on this site and its predecessors over the years. Not everything, but most of the recent stuff at least.',
+            'articles' => $articles,
+            'total_count' => $total_count,
+            'per_page' => $this->per_page,
+            'page' => $page,
+        ]);
     }
 
     public function single($url = ''): string
@@ -66,6 +57,9 @@ class Display extends BaseController
         return view('Midair\Blog\Views\single', [
             'data' => $blog,
             'title' => $blog->title,
+            'type' => 'writing',
+            'description' => $blog->description,
+            'search' => 'blog',
         ], [
             'cache' => 3600, // cache view for 1 hour
             'cache_name' => 'Blog-single-' . $blog->id,

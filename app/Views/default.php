@@ -4,51 +4,79 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><?= $this->renderSection('title') ?> | matthewpennell.com</title>
-        <meta name="description" content="UK-based UX designer and developer with over two decades of experience and a passion for writing, music, and gaming.">
+        <meta name="description" content="<?= $this->renderSection('description', true) ?>">
 
         <meta property="og:title" content="<?= $this->renderSection('og-title') ?>">
-        <meta property="og:type" content="<?= $this->renderSection('type') ?>">
+        <meta property="og:type" content="website">
         <meta property="og:url" content="<?= (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://" . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') ?>">
         <meta property="og:site_name" content="matthewpennell.com" />
         <meta property="og:description" content="<?= $this->renderSection('description') ?>" />
 
-        <link rel="icon" href="/favicon.ico" sizes="any">
-        <link rel="icon" href="/icon.svg" type="image/svg+xml">
-        <link rel="apple-touch-icon" href="icon.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=link,open_in_new,rss_feed" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inclusive+Sans:ital,wght@0,300..700;1,300..700&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0&icon_names=format_quote" />
         <link rel="stylesheet" href="/css/midair.css?v=<?= filemtime($_SERVER['DOCUMENT_ROOT'] . '/css/midair.css') ?>">
-        <script src="https://unpkg.com/htmx.org@2.0.4"></script>
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YRPVEZTZH7"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-YRPVEZTZH7');
-        </script>
-        <script>
-            document.addEventListener('htmx:afterRequest', function(event) {
-                var announceDiv = document.getElementById('announce');
-                var message = document.createElement('div');
-                message.textContent = 'New content has been loaded below.';
-                announceDiv.appendChild(message);
-                setTimeout(function() {
-                    announceDiv.removeChild(message);
-                }, 2000); // remove the message after 2 seconds
-            });
-        </script>
+        <?php if ($_SERVER['HTTP_HOST'] !== 'localhost' && stristr($_SERVER['HTTP_HOST'], '192.168.') === false): ?>
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-YRPVEZTZH7"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-YRPVEZTZH7');
+            </script>
+        <?php endif ?>
     </head>
-    <body hx-boost="true">
-        <div id="announce" aria-live="polite"></div>
-        <a href="/"><img src="/images/mp.png" alt="matthewpennell.com" id="logo"></a>
-        <a href="/rss/blog,commonplace,bluesky,flashfiction,medium,review" id="rss" title="Subscribe to the blog-plus-other-bits-of-writing RSS feed" hx-boost="false"><span class="material-symbols-outlined">rss_feed</span></a>
-        <main>
-            <?= $this->renderSection('content') ?>
-        </main>
-        <?= $this->include('partials/footer') ?>
+    <body class="<?= $type ?> h-card">
+        <div class="layout">
+            <div class="layout__pane--meta">
+                <div class="logo" role="button" tabindex="0">
+                    <svg class="logomark" width="41.5" height="48" viewBox="0 0 447 520" fill="none" xmlns="http://www.w3.org/2000/svg" class="u-logo">
+                        <path d="M225 0L450.167 130V390L225 520L-0.166611 390V130L225 0Z" fill="#000"/>
+                        <path d="M37.5 309V196.25C37.5 175.677 54.1774 159 74.75 159V159C95.3226 159 112 175.677 112 196.25V309" stroke-width="33"/>
+                        <path d="M186.5 309V196.25C186.5 175.677 203.177 159 223.75 159V159C244.323 159 261 175.677 261 196.25V309" stroke-width="33"/>
+                        <path d="M335.5 309V196.25C335.5 175.677 352.177 159 372.75 159V159C393.323 159 410 175.677 410 196.25V309" stroke-width="33"/>
+                        <path d="M186.5 196L186.5 308.75C186.5 329.323 169.823 346 149.25 346V346C128.677 346 112 329.323 112 308.75L112 196" stroke-width="33"/>
+                        <path d="M37.5 196L37.5 308.75C37.5 329.323 20.8226 346 0.25 346V346C-20.3226 346 -37 329.323 -37 308.75L-37 196" stroke-width="33"/>
+                        <path d="M335.5 196L335.5 308.75C335.5 329.323 318.823 346 298.25 346V346C277.677 346 261 329.323 261 308.75L261 196" stroke-width="33"/>
+                        <path d="M484.5 196L484.5 308.75C484.5 329.323 467.823 346 447.25 346V346C426.677 346 410 329.323 410 308.75L410 196" stroke-width="33"/>
+                        <line x1="335" y1="219" x2="335" y2="582" stroke-width="33"/>
+                        <g filter="url(#filter0_d_114_31)">
+                        <line x1="335" y1="314" x2="335" y2="359" stroke-width="33"/>
+                        </g>
+                        <line x1="335" y1="304" x2="335" y2="372" stroke-width="33"/>
+                    </svg>
+                </div>
+                <div class="mobile-nav">
+                    <button class="mobile-nav__button" aria-label="Toggle mobile navigation">
+                        <span class="mobile-nav__button__bar"></span>
+                        <span class="mobile-nav__button__bar"></span>
+                        <span class="mobile-nav__button__bar"></span>
+                    </button>
+                </div>
+                <nav class="primary">
+                    <ul>
+                        <li><a class="u-url nav-home" href="/">Home</a></li>
+                        <li><a class="nav-about" href="/about-me">About me</a></li>
+                        <li><a class="nav-work" href="/work">My work</a></li>
+                        <li><a class="nav-now" href="/now">Now</a></li>
+                        <li><a class="nav-writing" href="/writing">Writing</a></li>
+                        <li><a class="nav-consuming" href="/consuming">Consuming</a></li>
+                        <li><a class="nav-contact" href="/contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <?= $this->include('partials/meta/' . $type) ?>
+            </div>
+            <div class="layout__pane--content">
+                <?= $this->renderSection('content') ?>
+            </div>
+            <?= $this->include('partials/footer') ?>
+        </div>
+        <script type="module" src="/js/midair.js"></script>
     </body>
 </html>
