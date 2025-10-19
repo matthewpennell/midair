@@ -700,9 +700,9 @@ nav.primary {
   }
 }
 
-@media (max-height: 400px) {
+@media (max-height: 450px) {
   .hero h1 {
-    margin: 0 calc(var(--grid-gap) * 2);
+    margin: 0 calc(var(--grid-gap) * 4);
   }
 }
 
