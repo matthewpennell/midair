@@ -15,7 +15,7 @@ class Main extends BaseController
 
         // Retrieve the latest entries from the Writing and Consuming feeds, and the most recent Bluesky post.
         $latest_writing = $MidairModel->asObject()->where('status', 'published')->whereIn('type', ['blog', 'medium', 'flashfiction', 'review'])->orderBy('date', 'DESC')->first();
-        $latest_consuming = $MidairModel->asObject()->where('status', 'published')->whereIn('type', ['goodreads', 'commonplace', 'letterboxd', 'spotify'])->orderBy('date', 'DESC')->first();
+        $latest_consuming = $MidairModel->asObject()->where('status', 'published')->whereIn('type', ['goodreads', 'commonplace', 'letterboxd', 'backloggd', 'spotify'])->orderBy('date', 'DESC')->first();
         $latest_bluesky = $MidairModel->asObject()->where('status', 'published')->where('type', 'bluesky')->orderBy('date', 'DESC')->first();
 
         // Load the main content view and pass in the data.
@@ -65,19 +65,19 @@ class Main extends BaseController
         $MidairModel = new \App\Models\Midair();
 
         // Retrieve a total count of posts to use for pagination calculations.
-        $total_count = $MidairModel->where('status', 'published')->whereIn('type', ['goodreads', 'letterboxd', 'spotify', 'commonplace'])->countAllResults();
+        $total_count = $MidairModel->where('status', 'published')->whereIn('type', ['goodreads', 'letterboxd', 'backloggd', 'spotify', 'commonplace'])->countAllResults();
 
         // Calculate the offset for the current page.
         $offset = ($page - 1) * $this->per_page;
 
         // Retrieve the latest entries from the Consuming feed.
-        $articles = $MidairModel->asObject()->where('status', 'published')->whereIn('type', ['goodreads', 'letterboxd', 'spotify', 'commonplace'])->orderBy('date', 'DESC')->limit($this->per_page)->offset($offset)->findAll();
+        $articles = $MidairModel->asObject()->where('status', 'published')->whereIn('type', ['goodreads', 'letterboxd', 'backloggd', 'spotify', 'commonplace'])->orderBy('date', 'DESC')->limit($this->per_page)->offset($offset)->findAll();
 
         // Load the main content view and pass in the data.
         return view('consuming', [
             'title' => 'Consuming',
             'type' => 'consuming',
-            'search' => 'goodreads,letterboxd,spotify,commonplace',
+            'search' => 'goodreads,letterboxd,backloggd,spotify,commonplace',
             'description' => 'Everything I am reading, watching, listening to or playing.',
             'articles' => $articles,
             'total_count' => $total_count,

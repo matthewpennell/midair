@@ -38,11 +38,11 @@ Any SQL dump file can be imported into the database at startup by placing it ins
 Provider modules are located in the `midair` directory. Each module should have its own directory (named for the content type), containing the following files:
 
 - `Config/Routes.php`: Routing configuration for the module
-- `Controllers/Display.php`: Controller class for the module output
-- `Controllers/Import.php`: Controller class for the module import
-- `Database/Migrations/YYYY-MM-DD-HHMMSS_CreateTable.php`: Migration file for the module database table
+- `Database/Migrations/YYYY-MM-DD-HHMMSS_CreateTable.php`: Migration file for the module database table, field names based on what data you expect to be able to import from the provider
 - `Models/ModuleName.php`: Model class for the module
+- `Controllers/Import.php`: Controller class for the module import
+- `Controllers/Display.php`: Controller class for the module output
 - `Views/item.php`: View file for the module items when rendered within a list
 - `Views/single.php`: View file for the module items when rendered as a single item
 
-Environment keys for any new module should be added to the `.env` file in the root of the project.
+Environment keys for any new module should be added to the `.env` file in the root of the project. When ready to test, add the module to the `app/Config/Autoload.php` file and restart Docker to run the new migration. New categories for writing or consuming feeds also need to be added to those queries in the `Main.php` controller. And the cron job to call the import scripts should also be updated to include the new module.
