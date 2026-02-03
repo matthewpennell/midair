@@ -44,7 +44,7 @@ class Display extends BaseController
 
        // Retrieve the blog entry from the database.
        $sql = 'SELECT * FROM mediums WHERE link REGEXP ?';
-       $pattern = '^' . env('medium.rss_link_root') . $url . '$';
+       $pattern = $url . '$';
        $medium = $db->query($sql, [$pattern])->getRow();
 
         // If the post doesn't exist, throw a 404 error.
