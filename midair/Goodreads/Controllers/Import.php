@@ -48,10 +48,14 @@ class Import extends BaseController {
                 $author = $matches[1] ?? '';
                 preg_match("/bookTitle\" href=\"(.+)\"/", $item->description, $matches);
                 $bookUrl = $matches[1] ?? '';
+                preg_match("/bookTitle.*>(.+)<\//", $item->description, $matches);
+                $title = $matches[1] ?? '';
                 $guid = (string) str_replace('Review', '', $item->guid);
                 $pubDate = (string) $item->pubDate;
                 preg_match("/(\d) stars/", $item->description, $matches);
                 $rating = $matches[1] ?? '';
+                preg_match("/<img .* src=\"(.+)\"/", $item->description, $matches);
+                $image = $matches[1] ?? '';
 
                 // If there's no content, grab the description and chop out the metadata to 
                 // only leave the review (if there is one).
@@ -65,6 +69,14 @@ class Import extends BaseController {
                 }
                 $categoriesString = implode(', ', $categories);
 
+                /**
+                 * 22/02/26: Goodreads seems to have blocked fetching the contents of the individual book pages, 
+                 * so I can no longer request the proper title, description, publication date, and image URL. 
+                 * For now, I'll just pull what I can from the RSS feed and save that to the database, but ideally 
+                 * I would like to be able to fetch the full review content and metadata from the book page. I'll 
+                 * need to look into whether there's a way around this block in the future.
+                 *
+                
                 // Request the review from Goodreads and extract the parts we need to complete the model.
                 $bookReviewPage = file_get_contents($link);
 
@@ -105,13 +117,15 @@ class Import extends BaseController {
                 }
                 $publication_date = $formattedDate ?? '';
 
+                */
+
                 $data = array(
                     'title' => $title,
                     'link' => $link,
                     'description' => $description,
                     'content' => $description,
-                    'book_description' => $book_description,
-                    'publication_date' => $publication_date,
+                    //'book_description' => $book_description,
+                    //'publication_date' => $publication_date,
                     'image' => $image,
                     'author'=> $author,
                     'rating' => $rating,
