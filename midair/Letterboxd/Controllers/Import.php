@@ -51,7 +51,15 @@ class Import extends BaseController {
                 $rating = $matches[1] ?? 0;
 
                 // Fetch the review page and get the contents of the review and link to the actual film.
-                $options  = array('http' => array('user_agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'));
+                $options  = array('http' => array(
+                    'method' => 'GET',
+                    "header" => implode("\r\n", [
+                        "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+                        "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                        "Accept-Language: en-GB,en;q=0.5",
+                        "Connection: close"
+                    ])
+                ));
                 $context  = stream_context_create($options);
                 $reviewPage = file_get_contents($link, false, $context);
                 preg_match('/og:description\" content=\"(.+?)\"/', $reviewPage, $matches);
