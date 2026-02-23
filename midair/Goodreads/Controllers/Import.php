@@ -76,9 +76,11 @@ class Import extends BaseController {
                  * I would like to be able to fetch the full review content and metadata from the book page. I'll 
                  * need to look into whether there's a way around this block in the future.
                  *
-                
+
                 // Request the review from Goodreads and extract the parts we need to complete the model.
-                $bookReviewPage = file_get_contents($link);
+                $options  = array('http' => array('user_agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'));
+                $context  = stream_context_create($options);
+                $bookReviewPage = file_get_contents($link, false, $context);
 
                 // Extract the title from the H1.
                 preg_match('/<h1>(.+?)<\/h1>/', $bookReviewPage, $matches);
@@ -100,7 +102,7 @@ class Import extends BaseController {
                 // Now request the actual book page and retrieve the remaining pieces of metadata.
                 preg_match('/<a\s+[^>]*?class="[^"]*\bbookTitle\b[^"]*"[^>]*\bhref="([^"]+)"[^>]*>/i', $bookReviewPage, $matches);
                 $bookUrl = $matches[1] ?? '';
-                $bookDetailPage = file_get_contents('https://www.goodreads.com' . $bookUrl);
+                $bookDetailPage = file_get_contents('https://www.goodreads.com' . $bookUrl, false, $context);
 
                 // Pull the image URL out of the JavaScript metadata.
                 preg_match('/"imageUrl":"([^"]+\.(?:jpg|jpeg|png|gif|webp))"/i', $bookDetailPage, $matches);
@@ -117,7 +119,7 @@ class Import extends BaseController {
                 }
                 $publication_date = $formattedDate ?? '';
 
-                */
+                //*/
 
                 $data = array(
                     'title' => $title,
