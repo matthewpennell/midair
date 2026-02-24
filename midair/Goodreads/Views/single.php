@@ -36,10 +36,12 @@
                     <h2>Review</h2>
                     <p><?= $data->description ?></p>
                 <?php endif; ?>
+                <!--
                 <h2>Summary</h2>
                 <p><small><?= json_decode('"' . $data->book_description . '"') ?></small></p>
                 <h2>Publication date</h2>
                 <p><small><?= $data->publication_date ?></small></p>
+                -->
             </div>
         </article>
     </div>

@@ -46,22 +46,40 @@ class Import extends BaseController {
                 $guid = (string) $item->guid;
                 $pubDate = (string) $item->pubDate;
 
-                // Extract the rating from the title.
-                preg_match('/([★½]+)/', $item->title, $matches);
-                $rating = $matches[1] ?? 0;
+                // Extract the title and year from the title. The title is in the format "Film Title, Year - ★★★½".
+                preg_match('/^(.+?), (\d{4}) - (.+)$/', $item->title, $matches);
+                $title = $matches[1] ?? '';
+                $releaseYear = $matches[2] ?? '';
+                $rating = $matches[3] ?? '';
+
+                // Extract the poster image and the review text from the RSS description.
+                // The poster image is the src attribute of the first <img> tag in the description, and the review text is the content of the second <p> tag, as long as it doesn't start with "Watched on".
+                $description = (string) $item->description;
+                preg_match('/<img src="(.+?)"/', $description, $matches);
+                $image = $matches[1] ?? '';
+                preg_match_all('/<p>(.+?)<\/p>/', $description, $matches);
+                $review = '';
+                if (isset($matches[1][1]) && !str_starts_with($matches[1][1], 'Watched on')) {
+                    $review = $matches[1][1];
+                }
+
+                /**
+                 * 24/02/26: Letterboxd are blocking direct requests to the review page,
+                 * so commenting out that part of the code for now. Will need to find a 
+                 * workaround for this if we want to fetch the review text and film metadata, 
+                 * which is currently only available on the review page and not in the RSS feed.
+                 *
 
                 // Fetch the review page and get the contents of the review and link to the actual film.
-                $options  = array('http' => array(
-                    'method' => 'GET',
-                    "header" => implode("\r\n", [
-                        "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-                        "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-                        "Accept-Language: en-GB,en;q=0.5",
-                        "Connection: close"
-                    ])
-                ));
-                $context  = stream_context_create($options);
-                $reviewPage = file_get_contents($link, false, $context);
+                $client = \Config\Services::curlrequest();
+                $response = $client->request('GET', $link, [
+                    'allow_redirects' => true,
+                    'headers' => [
+                        'User-Agent' => 'Code Igniter Framework v4',
+                        'Accept'     => 'text/html,application/xhtml+xml'
+                    ]
+                ]);
+                $reviewPage = $response->getBody();
                 preg_match('/og:description\" content=\"(.+?)\"/', $reviewPage, $matches);
                 $review = $matches[1] ?? '';
 
@@ -84,13 +102,15 @@ class Import extends BaseController {
                 $releaseYear = explode(')', $title_parts[1]);
                 $releaseYear = $releaseYear[0];
 
+                //*/
+
                 $data = array(
                     'title' => $title,
                     'release_year' => $releaseYear,
                     'link' => $link,
                     'review' => $review,
                     'rating' => $rating,
-                    'description' => $description,
+                    //'description' => $description,
                     'image' => $image,
                     'guid' => $guid,
                     'pubDate' => date('Y-m-d H:i:s', strtotime($pubDate)),

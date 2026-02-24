@@ -38,8 +38,10 @@
                 <?php endif; ?>
                 <h2>Release year</h2>
                 <p><?= $data->release_year ?></p>
+                <!--
                 <h2>Plot summary</h2>
                 <p><small><?= $data->description ?></small></p>
+                -->
             </div>
         </article>
     </div>
