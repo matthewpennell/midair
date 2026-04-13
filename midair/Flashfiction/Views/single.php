@@ -5,9 +5,10 @@
 <?= $this->section('description') ?><?= $data->description ?><?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-    <div class="content">
+    <div class="content h-entry">
+        <link class="u-url" href="<?= current_url() ?>">
         <header class="title">
-            <h1><?= $data->title ?></h1>
+            <h1 class="p-name"><?= $data->title ?></h1>
             <div class="source tumblr">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 256 256" xml:space="preserve">
                     <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
@@ -15,17 +16,17 @@
                         <path d="M 60.502 73.03 h -9.484 c -8.54 0 -14.905 -4.394 -14.905 -14.905 V 41.292 h -7.76 v -9.115 c 8.54 -2.218 12.112 -9.567 12.523 -15.931 h 8.868 v 14.453 H 60.09 v 10.593 H 49.744 V 55.95 c 0 4.393 2.218 5.912 5.748 5.912 h 5.01 V 73.03 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
                     </g>
                 </svg>
-                <a href="<?= $data->link ?>" target="_blank">This story was first published on <strong>Ten Minutes of Prose</strong>. Visit the original here →</a>
+                <a class="u-syndication" href="<?= $data->link ?>" target="_blank">This story was first published on <strong>Ten Minutes of Prose</strong>. Visit the original here →</a>
             </div>
         </header>
         <article>
             <div class="hexagon content__date">
-                <div class="hexagon__inner">
+                <time class="hexagon__inner dt-published" datetime="<?= date('c', strtotime($data->pubDate)) ?>">
                     <span class="month"><?= date('M', strtotime($data->pubDate)) ?></span>
                     <span class="day"><?= date('d', strtotime($data->pubDate)) ?></span>
-                </div>
+                </time>
             </div>
-            <div class="content__body">
+            <div class="content__body e-content">
                 <?= $data->content ?>
             </div>
         </article>

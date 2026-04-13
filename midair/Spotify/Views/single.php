@@ -5,20 +5,21 @@
 <?= $this->section('description') ?><?= $description ?><?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-    <div class="content">
-        <div class="content__image">
-            <img src="<?= $data->cover ?>" alt="<?= $data->artist ?>">
+    <div class=”content h-entry”>
+        <link class=”u-url” href=”<?= current_url() ?>”>
+        <div class=”content__image”>
+            <img src=”<?= $data->cover ?>” alt=”<?= $data->artist ?>”>
         </div>
-        <header class="title">
-            <h1>“<?= $data->track ?>” by <?= $data->artist ?></h1>
-            <div class="source medium">
-                <img class="source-icon" src="/images/spotify.svg" width="20" height="20" alt="" />
-                <a href="<?= $data->url ?>" target="_blank">This track was saved as a favourite on <strong>Spotify</strong>. Visit the original here →</a>
+        <header class=”title”>
+            <h1 class=”p-name”>”<?= $data->track ?>” by <?= $data->artist ?></h1>
+            <div class=”source medium”>
+                <img class=”source-icon” src=”/images/spotify.svg” width=”20” height=”20” alt=”” />
+                <a class=”u-like-of” href=”<?= $data->url ?>” target=”_blank”>This track was saved as a favourite on <strong>Spotify</strong>. Visit the original here →</a>
             </div>
         </header>
         <article>
             <div class="hexagon content__date">
-                <div class="hexagon__inner">
+                <time class="hexagon__inner dt-published" datetime="<?= date('c', strtotime($data->pubDate)) ?>">
                     <span class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 100 100">
                             <path d="m39.5 37.777c-0.98828-4.2305-0.625-8.7812 1.2773-12.957 0.26953-0.58594 0.56641-1.168 0.89453-1.7383 0.32812-0.57031 0.68359-1.1172 1.0586-1.6445 5.9688-8.3711 17.453-10.996 26.539-5.75 9.0859 5.2461 12.555 16.504 8.2891 25.859-0.26953 0.58594-0.56641 1.168-0.89453 1.7383-0.32812 0.57031-0.68359 1.1172-1.0586 1.6445-2.6641 3.7344-6.4258 6.3281-10.582 7.5859l-25.527-14.738z" fill-rule="evenodd" fill="#ffffff"/>
@@ -32,7 +33,7 @@
                             <path d="m75.086 61.191c0-0.30469 0.14453-0.59375 0.38672-0.77734 0.24219-0.18359 0.55859-0.24609 0.85547-0.16016 2.3242 0.65234 7.2617 2.043 9.1055 2.5586 0.42188 0.11719 0.71094 0.50391 0.71094 0.94141v5.5312c0 0.30469-0.14453 0.59375-0.38672 0.77734-0.24219 0.18359-0.55859 0.24609-0.85547 0.16016-2.8867-0.8125-9.8164-2.7578-9.8164-2.7578z" fill-rule="evenodd" fill="#ffffff"/>
                         </svg>
                     </span>
-                </div>
+                </time>
                 <span class="month"><?= date('M', strtotime($data->pubDate)) ?></span>
                 <span class="day"><?= date('d', strtotime($data->pubDate)) ?></span>
             </div>
