@@ -927,6 +927,7 @@ nav.primary {
   display: flex;
   flex-direction: column;
   padding-bottom: calc(var(--grid-gap) * 1.33333);
+  break-inside: avoid;
 }
 
 @media (max-width: 799px) {
