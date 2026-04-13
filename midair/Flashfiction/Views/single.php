@@ -29,5 +29,6 @@
                 <?= $data->content ?>
             </div>
         </article>
+        <?= $this->include('partials/share') ?>
     </div>
 <?= $this->endSection() ?>
