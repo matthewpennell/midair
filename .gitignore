@@ -132,3 +132,6 @@ nb-configuration.xml
 /phpunit*.xml
 
 /.php-cs-fixer.php
+
+.claude/
+CLAUDE.md

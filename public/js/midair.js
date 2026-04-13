@@ -3,6 +3,10 @@ import { setupListContainer } from './modules/layout.js';
 import { highlightSearchTerms } from './modules/search.js';
 import { lastFmService } from './modules/lastfm.js';
 import { notificationManager } from './modules/notifications.js';
+import { themeManager } from './modules/theme.js';
+
+// Apply theme before first paint
+themeManager.init();
 
 // Initialize layout functionality
 setupListContainer();

@@ -39,6 +39,142 @@
     --pink: oklch(64.59% 0.210 341.52);
     --gold: oklch(79.06% 0.151 98.49);
     --sky-blue: oklch(72.77% 0.126 236.94);
+
+    /* Semantic colour tokens (light mode defaults) */
+    --color-text: #000;
+    --color-bg: #fff;
+    --color-border: #ccc;
+    --color-surface: #fff;
+    --color-text-muted: rgba(0, 0, 0, 0.71);
+}
+
+/* ==========================================================================
+   1b. Dark Mode Overrides
+   ========================================================================== */
+
+[data-theme="dark"] {
+    /* Semantic tokens */
+    --color-text: oklch(93% 0 0);
+    --color-bg: oklch(13% 0.005 240);
+    --color-border: oklch(28% 0 0);
+    --color-surface: oklch(19% 0.005 240);
+    --color-text-muted: oklch(65% 0 0);
+
+    /* Palette — adjusted for readability as content-area accents on dark bg */
+    --magenta: oklch(70% 0.185 357.06);
+    --dark-teal: oklch(55% 0.057 223.30);
+    --teal: oklch(60% 0.067 188.53);
+    --blue: oklch(62% 0.254 269.88);
+    --olive: oklch(62% 0.050 100.79);
+    --cyan: oklch(62% 0.142 182.04);
+    --purple: oklch(62% 0.197 289.57);
+    --yellow: oklch(78% 0.161 100.14);
+    --pink: oklch(68% 0.210 341.52);
+    --gold: oklch(68% 0.151 98.49);
+}
+
+/* Section meta pane backgrounds — explicit dark values so they stay deep/moody
+   rather than using the lightened palette vars above */
+[data-theme="dark"] .home .layout__pane--meta {
+    background-color: oklch(28% 0.161 100.14);
+}
+[data-theme="dark"] .home .layout__pane--meta::before {
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, oklch(28% 0.161 100.14) 40%, transparent 100%);
+}
+[data-theme="dark"] .writing .layout__pane--meta {
+    background-color: oklch(26% 0.067 188.53);
+}
+[data-theme="dark"] .writing .layout__pane--meta::before {
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, oklch(26% 0.067 188.53) 40%, transparent 100%);
+}
+[data-theme="dark"] .consuming .layout__pane--meta {
+    background-color: oklch(26% 0.197 289.57);
+}
+[data-theme="dark"] .consuming .layout__pane--meta::before {
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, oklch(26% 0.197 289.57) 40%, transparent 100%);
+}
+[data-theme="dark"] .about .layout__pane--meta {
+    background-color: oklch(26% 0.254 269.88);
+}
+[data-theme="dark"] .about .layout__pane--meta::before {
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, oklch(26% 0.254 269.88) 40%, transparent 100%);
+}
+[data-theme="dark"] .work .layout__pane--meta {
+    background-color: oklch(26% 0.050 100.79);
+}
+[data-theme="dark"] .work .layout__pane--meta::before {
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, oklch(26% 0.050 100.79) 40%, transparent 100%);
+}
+[data-theme="dark"] .now .layout__pane--meta {
+    background-color: oklch(26% 0.142 182.04);
+}
+[data-theme="dark"] .now .layout__pane--meta::before {
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, oklch(26% 0.142 182.04) 40%, transparent 100%);
+}
+[data-theme="dark"] .contact .layout__pane--meta {
+    background-color: oklch(26% 0.210 341.52);
+}
+[data-theme="dark"] .contact .layout__pane--meta::before {
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, oklch(26% 0.210 341.52) 40%, transparent 100%);
+}
+[data-theme="dark"] .colophon .layout__pane--meta {
+    background-color: oklch(26% 0.151 98.49);
+}
+[data-theme="dark"] .colophon .layout__pane--meta::before {
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, oklch(26% 0.151 98.49) 40%, transparent 100%);
+}
+
+/* In dark mode, home/now/colophon meta text was overridden to #000 — restore to white */
+[data-theme="dark"] .home .layout__pane--meta,
+[data-theme="dark"] .now .layout__pane--meta,
+[data-theme="dark"] .colophon .layout__pane--meta {
+    color: #fff;
+}
+
+[data-theme="dark"] .home footer, [data-theme="dark"] .home footer a,
+[data-theme="dark"] .now footer, [data-theme="dark"] .now footer a,
+[data-theme="dark"] .colophon footer, [data-theme="dark"] .colophon footer a {
+    color: #fff;
+}
+
+/* Content area background and text */
+[data-theme="dark"] .layout__pane--content {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
+
+/* Logo strokes — match the dark meta pane backgrounds exactly */
+[data-theme="dark"] .home .logo path,
+[data-theme="dark"] .home .logo line {
+    stroke: oklch(28% 0.161 100.14);
+}
+[data-theme="dark"] .writing .logo path,
+[data-theme="dark"] .writing .logo line {
+    stroke: oklch(26% 0.067 188.53);
+}
+[data-theme="dark"] .consuming .logo path,
+[data-theme="dark"] .consuming .logo line {
+    stroke: oklch(26% 0.197 289.57);
+}
+[data-theme="dark"] .about .logo path,
+[data-theme="dark"] .about .logo line {
+    stroke: oklch(26% 0.254 269.88);
+}
+[data-theme="dark"] .work .logo path,
+[data-theme="dark"] .work .logo line {
+    stroke: oklch(26% 0.050 100.79);
+}
+[data-theme="dark"] .now .logo path,
+[data-theme="dark"] .now .logo line {
+    stroke: oklch(26% 0.142 182.04);
+}
+[data-theme="dark"] .contact .logo path,
+[data-theme="dark"] .contact .logo line {
+    stroke: oklch(26% 0.210 341.52);
+}
+[data-theme="dark"] .colophon .logo path,
+[data-theme="dark"] .colophon .logo line {
+    stroke: oklch(26% 0.151 98.49);
 }
 
 /* ==========================================================================
@@ -66,7 +202,7 @@ body,
   font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, Times, "Times New Roman", serif;
   font-size: 100%; /* 16px */
   line-height: 1.5; /* 24px */
-  color: #000;
+  color: var(--color-text);
 }
 
 h1, h2, h3, h4, h5, h6,
@@ -208,8 +344,7 @@ a {
 .layout__pane--meta {
   flex: 1;
   background-color: black; /* default to make it easy to spot missing body classes */
-  background-image: linear-gradient(to right, rgba(0,0,0,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.1) 1px, transparent 1px);
-  background-size: 12px 12px;
+  background-repeat: repeat;
   color: #fff;
   position: relative;
 }
@@ -398,11 +533,11 @@ nav.primary {
 
 .logo path,
 .logo line {
-  stroke: #000;
+  stroke: var(--color-text);
 }
 
 .logo path:first-child {
-  fill: #fff;
+  fill: var(--color-surface);
 }
 
 /* Per section colour overrides */
@@ -414,7 +549,7 @@ nav.primary {
 .contact .logo path:first-child,
 .writing .logo path:first-child,
 .consuming .logo path:first-child {
-  fill: #000;
+  fill: var(--color-text);
 }
 
 .writing .logo path,
@@ -551,6 +686,47 @@ nav.primary {
     font-size: 1.5rem;
     transform: none;
   }  
+}
+
+/* Theme toggle button */
+.theme-toggle {
+    grid-column: 1;
+    grid-row: 4;
+    align-self: start;
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.71;
+    transition: opacity 0.2s ease;
+    padding: 0;
+    margin-left: calc(var(--grid-gap) + 3px);
+    z-index: 1;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus {
+    opacity: 1;
+}
+
+.theme-toggle .material-symbols-outlined {
+    font-size: 20px;
+}
+
+@media (max-width: 799px) {
+    .theme-toggle {
+        position: absolute;
+        top: calc((48px - 36px) / 2);
+        right: calc(var(--grid-gap) * 2 + 24px);
+        color: var(--yellow);
+        z-index: 3;
+    }
 }
 
 .section {
@@ -725,7 +901,7 @@ nav.primary {
   font-weight: 400;
   letter-spacing: 6px;
   text-align: center;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid var(--color-border);
   padding-bottom: calc(var(--grid-gap));
   width: calc((100% - 6 * var(--grid-gap)) / 7 * 3 + 2 * var(--grid-gap));
   margin: 0 auto;
@@ -804,7 +980,7 @@ nav.primary {
   left: calc(50% - 1px);
   width: 2px;
   height: 100%;
-  background-color: #ccc;
+  background-color: var(--color-border);
 }
 
 .list__year {
@@ -820,9 +996,9 @@ nav.primary {
   text-align: center;
   font-size: 0.875rem;
   line-height: 1.71429;
-  border: 2px solid #ccc;
+  border: 2px solid var(--color-border);
   border-radius: 100px;
-  background: #fff;
+  background: var(--color-surface);
   padding: 0 1rem;
   margin-bottom: calc(var(--grid-gap) * 2);
   z-index: 2;
@@ -912,23 +1088,23 @@ nav.primary {
   line-height: 40px;
   text-align: center;
   border-radius: 999px;
-  color: #000;
+  color: var(--color-text);
   text-decoration: none;
 }
 
 .pagination__link:hover,
 .pagination__link:focus {
-  background: #ccc;
+  background: var(--color-border);
 }
 
 .pagination__link--current {
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
 }
 
 .content__image {
   margin: 0 auto var(--grid-gap);
   width: calc((100% - 6 * var(--grid-gap)) / 7 * 3 + 2 * var(--grid-gap));
-  background: #ccc;
+  background: var(--color-border);
   border-radius: 999px;
   overflow: hidden;
   aspect-ratio: 1 / 1;
@@ -1145,7 +1321,7 @@ label {
 input[type="email"] {
   width: 100%;
   padding: calc(var(--grid-gap) / 2);
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 4px;
 }
 
@@ -1173,7 +1349,7 @@ button[type="submit"]:focus {
 .powered-by-line {
   font-size: 0.875rem;
   text-decoration: none;
-  color: #000;
+  color: var(--color-text);
 }
 
 /* Hexagons styling */
@@ -1378,7 +1554,7 @@ footer a:focus {
 }
 
 .notification {
-  background: #fff;
+  background: var(--color-surface);
   border-radius: calc(var(--grid-gap) / 6);
   display: flex;
   align-items: center;
@@ -1439,20 +1615,20 @@ footer a:focus {
   font-size: 0.75rem;
   line-height: 1.5;
   text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.71);
+  color: var(--color-text-muted);
 }
 
 .now-playing-title {
   font-weight: 700;
   font-size: 1.125rem;
   line-height: 1.33333;
-  color: rgba(0, 0, 0, 0.71);
+  color: var(--color-text-muted);
 }
 
 .now-playing-artist {
   font-size: 0.875rem;
   line-height: 1.28571;
-  color: rgba(0, 0, 0, 0.71);
+  color: var(--color-text-muted);
 }
 
 #latest-bluesky {
