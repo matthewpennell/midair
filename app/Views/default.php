@@ -4,8 +4,33 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><?= $this->renderSection('title') ?> | matthewpennell.com</title>
-        <meta name="description" content="<?= $this->renderSection('description', true) ?>">
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <script>
+            (function() {
+                var t = localStorage.getItem('midair-theme');
+                if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', t);
+            })();
+        </script>
+
+        <?php if ($_SERVER['HTTP_HOST'] !== 'localhost' && stristr($_SERVER['HTTP_HOST'], '192.168.') === false): ?>
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-YRPVEZTZH7"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-YRPVEZTZH7');
+            </script>
+        <?php endif ?>
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inclusive+Sans:ital,wght@0,300..700;1,300..700&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0&icon_names=contrast,format_quote" />
+        <link rel="stylesheet" href="/css/midair.css?v=<?= filemtime($_SERVER['DOCUMENT_ROOT'] . '/css/midair.css') ?>">
+
+        <meta name="description" content="<?= $this->renderSection('description', true) ?>">
         <meta property="og:title" content="<?= $this->renderSection('og-title') ?>">
         <meta property="og:type" content="website">
         <meta property="og:url" content="<?= (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://" . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') ?>">
@@ -17,27 +42,6 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
         <link rel="manifest" href="/site.webmanifest">
 
-        <script>
-            (function() {
-                var t = localStorage.getItem('midair-theme');
-                if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                document.documentElement.setAttribute('data-theme', t);
-            })();
-        </script>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inclusive+Sans:ital,wght@0,300..700;1,300..700&display=swap">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0&icon_names=contrast,format_quote" />
-        <link rel="stylesheet" href="/css/midair.css?v=<?= filemtime($_SERVER['DOCUMENT_ROOT'] . '/css/midair.css') ?>">
-        <?php if ($_SERVER['HTTP_HOST'] !== 'localhost' && stristr($_SERVER['HTTP_HOST'], '192.168.') === false): ?>
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-YRPVEZTZH7"></script>
-            <script>
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'G-YRPVEZTZH7');
-            </script>
-        <?php endif ?>
     </head>
     <body class="<?= $type ?> h-card">
         <div class="layout">
