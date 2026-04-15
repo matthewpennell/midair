@@ -70,20 +70,22 @@
                         <span class="mobile-nav__button__bar"></span>
                     </button>
                 </div>
-                <nav class="primary">
-                    <ul>
-                        <li><a class="u-url nav-home" href="/">Home</a></li>
-                        <li><a class="nav-about" href="/about-me">About me</a></li>
-                        <li><a class="nav-work" href="/work">My work</a></li>
-                        <li><a class="nav-now" href="/now">Now</a></li>
-                        <li><a class="nav-writing" href="/writing">Writing</a></li>
-                        <li><a class="nav-consuming" href="/consuming">Consuming</a></li>
-                        <li><a class="nav-contact" href="/contact">Contact</a></li>
-                    </ul>
-                </nav>
-                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <span class="material-symbols-outlined theme-toggle__icon">contrast</span>
-                </button>
+                <div class="nav-wrapper">
+                    <nav class="primary">
+                        <ul>
+                            <li><a class="u-url nav-home" href="/">Home</a></li>
+                            <li><a class="nav-about" href="/about-me">About me</a></li>
+                            <li><a class="nav-work" href="/work">My work</a></li>
+                            <li><a class="nav-now" href="/now">Now</a></li>
+                            <li><a class="nav-writing" href="/writing">Writing</a></li>
+                            <li><a class="nav-consuming" href="/consuming">Consuming</a></li>
+                            <li><a class="nav-contact" href="/contact">Contact</a></li>
+                        </ul>
+                    </nav>
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                        <span class="material-symbols-outlined theme-toggle__icon">contrast</span>
+                    </button>
+                </div>
                 <?= $this->include('partials/meta/' . $type) ?>
             </div>
             <div class="layout__pane--content">
