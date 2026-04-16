@@ -45,7 +45,7 @@
     </head>
     <body class="<?= $type ?> h-card">
         <div class="layout">
-            <div class="layout__pane--meta">
+            <div class="layout__pane--meta" style="--meta-pattern: url('/images/patterns/<?= str_pad(rand(1, 31), 2, '0', STR_PAD_LEFT) ?>.png')">
                 <div class="logo" role="button" tabindex="0">
                     <svg class="logomark" width="41.5" height="48" viewBox="0 0 447 520" fill="none" xmlns="http://www.w3.org/2000/svg" class="u-logo">
                         <path d="M225 0L450.167 130V390L225 520L-0.166611 390V130L225 0Z" fill="#000"/>

@@ -79,49 +79,49 @@
     background-color: oklch(28% 0.161 100.14);
 }
 [data-theme="dark"] .home .layout__pane--meta::before {
-    background: radial-gradient(ellipse 70% 60% at 50% 50%, oklch(28% 0.161 100.14) 40%, transparent 100%);
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, oklch(28% 0.161 100.14) 40%, oklch(28% 0.161 100.14 / 0.9) 100%);
 }
 [data-theme="dark"] .writing .layout__pane--meta {
     background-color: oklch(26% 0.067 188.53);
 }
 [data-theme="dark"] .writing .layout__pane--meta::before {
-    background: radial-gradient(ellipse 70% 60% at 50% 50%, oklch(26% 0.067 188.53) 40%, transparent 100%);
+    background: radial-gradient(ellipse 70% 60% at 60% 30%, oklch(26% 0.067 188.53) 40%, oklch(26% 0.067 188.53 / 0.9) 100%);
 }
 [data-theme="dark"] .consuming .layout__pane--meta {
     background-color: oklch(26% 0.197 289.57);
 }
 [data-theme="dark"] .consuming .layout__pane--meta::before {
-    background: radial-gradient(ellipse 70% 60% at 50% 50%, oklch(26% 0.197 289.57) 40%, transparent 100%);
+    background: radial-gradient(ellipse 70% 60% at 60% 30%, oklch(26% 0.197 289.57) 40%, oklch(26% 0.197 289.57 / 0.9) 100%);
 }
 [data-theme="dark"] .about .layout__pane--meta {
     background-color: oklch(26% 0.254 269.88);
 }
 [data-theme="dark"] .about .layout__pane--meta::before {
-    background: radial-gradient(ellipse 70% 60% at 50% 50%, oklch(26% 0.254 269.88) 40%, transparent 100%);
+    background: radial-gradient(ellipse 70% 60% at 60% 30%, oklch(26% 0.254 269.88) 40%, oklch(26% 0.254 269.88 / 0.9) 100%);
 }
 [data-theme="dark"] .work .layout__pane--meta {
     background-color: oklch(26% 0.050 100.79);
 }
 [data-theme="dark"] .work .layout__pane--meta::before {
-    background: radial-gradient(ellipse 70% 60% at 50% 50%, oklch(26% 0.050 100.79) 40%, transparent 100%);
+    background: radial-gradient(ellipse 70% 60% at 60% 30%, oklch(26% 0.050 100.79) 40%, oklch(26% 0.050 100.79 / 0.9) 100%);
 }
 [data-theme="dark"] .now .layout__pane--meta {
     background-color: oklch(26% 0.142 182.04);
 }
 [data-theme="dark"] .now .layout__pane--meta::before {
-    background: radial-gradient(ellipse 70% 60% at 50% 50%, oklch(26% 0.142 182.04) 40%, transparent 100%);
+    background: radial-gradient(ellipse 70% 60% at 60% 30%, oklch(26% 0.142 182.04) 40%, oklch(26% 0.142 182.04 / 0.9) 100%);
 }
 [data-theme="dark"] .contact .layout__pane--meta {
     background-color: oklch(26% 0.210 341.52);
 }
 [data-theme="dark"] .contact .layout__pane--meta::before {
-    background: radial-gradient(ellipse 70% 60% at 50% 50%, oklch(26% 0.210 341.52) 40%, transparent 100%);
+    background: radial-gradient(ellipse 70% 60% at 60% 30%, oklch(26% 0.210 341.52) 40%, oklch(26% 0.210 341.52 / 0.9) 100%);
 }
 [data-theme="dark"] .colophon .layout__pane--meta {
     background-color: oklch(26% 0.151 98.49);
 }
 [data-theme="dark"] .colophon .layout__pane--meta::before {
-    background: radial-gradient(ellipse 70% 60% at 50% 50%, oklch(26% 0.151 98.49) 40%, transparent 100%);
+    background: radial-gradient(ellipse 70% 60% at 60% 30%, oklch(26% 0.151 98.49) 40%, oklch(26% 0.151 98.49 / 0.9) 100%);
 }
 
 /* In dark mode, home/now/colophon meta text was overridden to #000 — restore to white */
@@ -345,6 +345,7 @@ a {
 .layout__pane--meta {
   flex: 1;
   background-color: black; /* default to make it easy to spot missing body classes */
+  background-image: var(--meta-pattern, none);
   background-repeat: repeat;
   color: #fff;
   position: relative;
@@ -366,7 +367,7 @@ a {
 }
 
 .home .layout__pane--meta::before {
-  background: radial-gradient(ellipse 70% 60% at 50% 50%, var(--yellow) 40%, transparent 100%);
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, var(--yellow) 40%, color-mix(in srgb, var(--yellow) 90%, transparent) 100%);
 }
 
 .writing .layout__pane--meta {
@@ -374,7 +375,7 @@ a {
 }
 
 .writing .layout__pane--meta::before {
-  background: radial-gradient(ellipse 70% 60% at 50% 50%, var(--teal) 40%, transparent 100%);
+  background: radial-gradient(ellipse 70% 60% at 60% 30%, var(--teal) 40%, color-mix(in srgb, var(--teal) 90%, transparent) 100%);
 }
 
 .consuming .layout__pane--meta {
@@ -382,7 +383,7 @@ a {
 }
 
 .consuming .layout__pane--meta::before {
-  background: radial-gradient(ellipse 70% 60% at 50% 50%, var(--purple) 40%, transparent 100%);
+  background: radial-gradient(ellipse 70% 60% at 60% 30%, var(--purple) 40%, color-mix(in srgb, var(--purple) 90%, transparent) 100%);
 }
 
 .about .layout__pane--meta {
@@ -390,7 +391,7 @@ a {
 }
 
 .about .layout__pane--meta::before {
-  background: radial-gradient(ellipse 70% 60% at 50% 50%, var(--blue) 40%, transparent 100%);
+  background: radial-gradient(ellipse 70% 60% at 60% 30%, var(--blue) 40%, color-mix(in srgb, var(--blue) 90%, transparent) 100%);
 }
 
 .work .layout__pane--meta {
@@ -398,7 +399,7 @@ a {
 }
 
 .work .layout__pane--meta::before {
-  background: radial-gradient(ellipse 70% 60% at 50% 50%, var(--olive) 40%, transparent 100%);
+  background: radial-gradient(ellipse 70% 60% at 60% 30%, var(--olive) 40%, color-mix(in srgb, var(--olive) 90%, transparent) 100%);
 }
 
 .now .layout__pane--meta {
@@ -407,7 +408,7 @@ a {
 }
 
 .now .layout__pane--meta::before {
-  background: radial-gradient(ellipse 70% 60% at 50% 50%, var(--cyan) 40%, transparent 100%);
+  background: radial-gradient(ellipse 70% 60% at 60% 30%, var(--cyan) 40%, color-mix(in srgb, var(--cyan) 90%, transparent) 100%);
 }
 
 .contact .layout__pane--meta {
@@ -415,7 +416,7 @@ a {
 }
 
 .contact .layout__pane--meta::before {
-  background: radial-gradient(ellipse 70% 60% at 50% 50%, var(--pink) 40%, transparent 100%);
+  background: radial-gradient(ellipse 70% 60% at 60% 30%, var(--pink) 40%, color-mix(in srgb, var(--pink) 90%, transparent) 100%);
 }
 
 .colophon .layout__pane--meta {
@@ -424,7 +425,7 @@ a {
 }
 
 .colophon .layout__pane--meta::before {
-  background: radial-gradient(ellipse 70% 60% at 50% 50%, var(--gold) 40%, transparent 100%);
+  background: radial-gradient(ellipse 70% 60% at 60% 30%, var(--gold) 40%, color-mix(in srgb, var(--gold) 90%, transparent) 100%);
 }
 
 /* ==========================================================================
