@@ -23,12 +23,10 @@
                 <p>
                     Speaking of data, this site imports everything I write across three different blogs
                     (okay, two of them are fairly quiet, but I might pick them up again in the future) plus my Medium.com account;
-                    my Goodreads and Letterboxd reviews; and any additions to my Spotify favourites playlist.
+                    my Goodreads, Letterboxd, and Backloggd entries and occasional reviews; and any additions to my Spotify favourites playlist.
                     It also pulls in all of my Strava workouts and Bluesky posts as well; currently they're 
                     not being displayed on the site apart from the latest Bluesky update on the homepage, 
-                    but I might add them in the future. Next on the list of sources I want to include is 
-                    <a href="https://backloggd.com" target="_blank" rel="noopener noreferrer">Backloggd</a>, 
-                    the video game backlog tracker.
+                    but I might add them in the future. 
                 </p>
 
                 <p>
@@ -64,7 +62,7 @@
                 <p>
                     The icons in the <a href="/consuming">Consuming</a> section are by Muhammad Nur Auliady Pamungkas; I found 
                     them on <a href="https://thenounproject.com/browse/collection-icon/hobbies-and-freetime-264540/" target="_blank" rel="noopener noreferrer">The Noun Project</a> 
-                    (CC BY 3.0 license).
+                    (CC BY 3.0 license). The tiled patterns on the left/top panel are chosen at random from the <a href="https://paulsmith.github.io/classic-mac-patterns/" target="_blank" rel="noopener noreferrer">Classic Mac OS System 1 patterns</a>.
                 </p>
 
                 <p>The source code is of course all on <a href="https://github.com/matthewpennell/midair" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
