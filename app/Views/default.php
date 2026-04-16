@@ -47,7 +47,7 @@
         <div class="layout">
             <div class="layout__pane--meta" style="--meta-pattern: url('/images/patterns/<?= str_pad(rand(1, 31), 2, '0', STR_PAD_LEFT) ?>.png')">
                 <div class="logo" role="button" tabindex="0">
-                    <svg class="logomark" width="41.5" height="48" viewBox="0 0 447 520" fill="none" xmlns="http://www.w3.org/2000/svg" class="u-logo">
+                    <svg class="logomark u-logo" width="41.5" height="48" viewBox="0 0 447 520" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M225 0L450.167 130V390L225 520L-0.166611 390V130L225 0Z" fill="#000"/>
                         <path d="M37.5 309V196.25C37.5 175.677 54.1774 159 74.75 159V159C95.3226 159 112 175.677 112 196.25V309" stroke-width="33"/>
                         <path d="M186.5 309V196.25C186.5 175.677 203.177 159 223.75 159V159C244.323 159 261 175.677 261 196.25V309" stroke-width="33"/>
