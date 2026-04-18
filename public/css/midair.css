@@ -1695,6 +1695,18 @@ footer a:focus {
 }
 
 /* Webmentions form and display blocks */
+.webmentions-block {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--grid-gap);
+  padding-bottom: calc(var(--grid-gap) * 2);
+}
+
+.webmention-submit,
+.webmentions__wrapper {
+  grid-column: 2 / span 7;
+}
+
 .webmentions__wrapper {
   padding: calc(var(--grid-gap) * 2) 0;
 }

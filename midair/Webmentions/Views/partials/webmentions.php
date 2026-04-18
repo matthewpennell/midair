@@ -3,6 +3,8 @@ $flashSuccess = session()->getFlashdata('webmention_success');
 $flashError   = session()->getFlashdata('webmention_error');
 ?>
 
+<div class="webmentions-block">
+
 <section class="webmention-submit">
     <div>
         <h2>Have you written about this?</h2>
@@ -127,3 +129,5 @@ $totalCount = count($webmentions);
 </div>
 
 <?php endif ?>
+
+</div>
