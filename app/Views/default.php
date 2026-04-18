@@ -42,6 +42,7 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
         <link rel="manifest" href="/site.webmanifest">
 
+        <?= $this->renderSection('head-extras') ?>
     </head>
     <body class="<?= $type ?> h-card">
         <div class="layout">

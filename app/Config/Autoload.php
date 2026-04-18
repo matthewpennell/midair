@@ -52,6 +52,7 @@ class Autoload extends AutoloadConfig
         'Midair\Spotify' => ROOTPATH . 'midair/Spotify',
         'Midair\Letterboxd' => ROOTPATH . 'midair/Letterboxd',
         'Midair\Goodreads' => ROOTPATH . 'midair/Goodreads',
+        'Midair\Webmentions' => ROOTPATH . 'midair/Webmentions',
     ];
 
     /**

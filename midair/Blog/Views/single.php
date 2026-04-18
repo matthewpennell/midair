@@ -1,5 +1,9 @@
 <?= $this->extend('default') ?>
 
+<?= $this->section('head-extras') ?>
+<link rel="webmention" href="/webmention">
+<?= $this->endSection() ?>
+
 <?= $this->section('title') ?><?= $title ?><?= $this->endSection() ?>
 <?= $this->section('og-title') ?><?= $title ?><?= $this->endSection() ?>
 <?= $this->section('description') ?><?= $data->description ?><?= $this->endSection() ?>
@@ -22,5 +26,6 @@
             </div>
         </article>
         <?= $this->include('partials/share') ?>
+        <?= $this->include('Midair\Webmentions\Views\partials\webmentions', ['webmentions' => $webmentions]) ?>
     </div>
 <?= $this->endSection() ?>

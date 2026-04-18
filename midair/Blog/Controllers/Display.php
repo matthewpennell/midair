@@ -53,16 +53,17 @@ class Display extends BaseController
             throw new \CodeIgniter\Exceptions\PageNotFoundException();
         }
 
+        $WebmentionModel = new \Midair\Webmentions\Models\Webmention();
+        $webmentions = $WebmentionModel->asObject()->like('target', '/blog/' . $url, 'both')->orderBy('created_at', 'ASC')->findAll();
+
         // Load the main content view and pass in the data.
         return view('Midair\Blog\Views\single', [
-            'data' => $blog,
-            'title' => $blog->title,
-            'type' => 'writing',
+            'data'        => $blog,
+            'title'       => $blog->title,
+            'type'        => 'writing',
             'description' => $blog->description,
-            'search' => 'blog',
-        ], [
-            'cache' => 3600, // cache view for 1 hour
-            'cache_name' => 'Blog-single-' . $blog->id,
+            'search'      => 'blog',
+            'webmentions' => $webmentions,
         ]);
     }
 }
