@@ -5,6 +5,14 @@ $shareTitle = urlencode($data->title);
 <div class="share">
     <ul class="share__links">
         <li>
+            <a href="https://bsky.app/intent/compose?text=<?= $shareTitle ?>%20<?= $shareUrl ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on Bluesky">
+                <svg height="32" width="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <circle cx="12" cy="12" r="12" class="black"/>
+                    <path d="M12 10.16c-.69-1.42-2.57-4.07-4.32-5.37C6.12 3.7 5.14 3.98 4.64 4.3c-.59.37-.64 1.24-.64 1.7s.26 2.82.43 3.22c.55 1.37 1.99 1.74 3.42 1.6-2.41.42-4.7 1.5-1.85 5.28C8.35 18.8 10.2 17 12 17c1.8 0 3.65 1.8 5.99-1.16 2.86-3.77.56-4.85-1.85-5.28 1.43.14 2.87-.23 3.42-1.6.17-.4.43-2.76.43-3.22s-.05-1.33-.64-1.7c-.5-.32-1.48-.6-3.04.49C14.57 6.09 12.69 8.74 12 10.16z" class="white"/>
+                </svg>
+            </a>
+        </li>
+        <li>
             <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $shareUrl ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
                 <svg height="32" width="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <circle cx="12" cy="12" r="12" class="black"/>
