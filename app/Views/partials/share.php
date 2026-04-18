@@ -5,15 +5,15 @@ $shareTitle = urlencode($data->title);
 <div class="share">
     <ul class="share__links">
         <li>
-            <a href="https://bsky.app/intent/compose?text=<?= $shareTitle ?>%20<?= $shareUrl ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on Bluesky">
+            <a href="https://bsky.app/intent/compose?text=<?= $shareTitle ?>%20<?= $shareUrl ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on Bluesky" title="Share on Bluesky">
                 <svg height="32" width="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <circle cx="12" cy="12" r="12" class="black"/>
-                    <path d="M12 10.16c-.69-1.42-2.57-4.07-4.32-5.37C6.12 3.7 5.14 3.98 4.64 4.3c-.59.37-.64 1.24-.64 1.7s.26 2.82.43 3.22c.55 1.37 1.99 1.74 3.42 1.6-2.41.42-4.7 1.5-1.85 5.28C8.35 18.8 10.2 17 12 17c1.8 0 3.65 1.8 5.99-1.16 2.86-3.77.56-4.85-1.85-5.28 1.43.14 2.87-.23 3.42-1.6.17-.4.43-2.76.43-3.22s-.05-1.33-.64-1.7c-.5-.32-1.48-.6-3.04.49C14.57 6.09 12.69 8.74 12 10.16z" class="white"/>
+                    <path transform="translate(0, 1.5)" d="M12 10.16c-.69-1.42-2.57-4.07-4.32-5.37C6.12 3.7 5.14 3.98 4.64 4.3c-.59.37-.64 1.24-.64 1.7s.26 2.82.43 3.22c.55 1.37 1.99 1.74 3.42 1.6-2.41.42-4.7 1.5-1.85 5.28C8.35 18.8 10.2 17 12 17c1.8 0 3.65 1.8 5.99-1.16 2.86-3.77.56-4.85-1.85-5.28 1.43.14 2.87-.23 3.42-1.6.17-.4.43-2.76.43-3.22s-.05-1.33-.64-1.7c-.5-.32-1.48-.6-3.04.49C14.57 6.09 12.69 8.74 12 10.16z" class="white"/>
                 </svg>
             </a>
         </li>
         <li>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $shareUrl ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $shareUrl ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook" title="Share on Facebook">
                 <svg height="32" width="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <circle cx="12" cy="12" r="12" class="black"/>
                     <path d="M14.5 5.5H13a2 2 0 00-2 2v1.5H9.5V11H11v6h2.5v-6H15l.5-2H13.5V7.75c0-.41.34-.75.75-.75h.75V5.5z" class="white"/>
@@ -21,7 +21,7 @@ $shareTitle = urlencode($data->title);
             </a>
         </li>
         <li>
-            <a href="https://twitter.com/intent/tweet?url=<?= $shareUrl ?>&text=<?= $shareTitle ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on X (Twitter)">
+            <a href="https://twitter.com/intent/tweet?url=<?= $shareUrl ?>&text=<?= $shareTitle ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on X (Twitter)" title="Share on X (Twitter)">
                 <svg height="32" width="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <circle cx="12" cy="12" r="12" class="black"/>
                     <path d="M13.15 11.1L17.5 6h-1.05l-3.77 4.38L9.8 6H6.5l4.56 6.63L6.5 18h1.05l3.98-4.63L14.2 18h3.3l-4.35-6.9zm-1.4 1.63-.46-.66L7.9 6.8h1.58l2.97 4.24.46.66 3.85 5.5h-1.56l-3.45-4.57z" class="white"/>
@@ -29,7 +29,7 @@ $shareTitle = urlencode($data->title);
             </a>
         </li>
         <li>
-            <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?= $shareUrl ?>&title=<?= $shareTitle ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?= $shareUrl ?>&title=<?= $shareTitle ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn" title="Share on LinkedIn">
                 <svg height="32" width="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <circle cx="12" cy="12" r="12" class="black"/>
                     <path d="M8.5 10h-2v7h2v-7zm-1-3.5a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5zM17.5 13.25c0-1.8-1.45-3.25-3.25-3.25-.9 0-1.71.37-2.25.96V10h-2v7h2v-4.25a1.5 1.5 0 013 0V17h2v-3.75z" class="white"/>
@@ -37,7 +37,7 @@ $shareTitle = urlencode($data->title);
             </a>
         </li>
         <li>
-            <a href="mailto:?subject=<?= $shareTitle ?>&body=<?= $shareUrl ?>" aria-label="Share via email">
+            <a href="mailto:?subject=<?= $shareTitle ?>&body=<?= $shareUrl ?>" aria-label="Share via email" title="Share via email">
                 <svg height="32" width="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <circle cx="12" cy="12" r="12" class="black"/>
                     <path d="M18 7.5H6a1 1 0 00-1 1v7a1 1 0 001 1h12a1 1 0 001-1v-7a1 1 0 00-1-1zm0 2.25L12 13.5 6 9.75V8.75l6 3.75 6-3.75v1z" class="white"/>
