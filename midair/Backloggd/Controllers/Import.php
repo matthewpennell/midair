@@ -6,6 +6,31 @@ use App\Controllers\BaseController;
 
 class Import extends BaseController {
 
+    private function fetchUrl(string $url): string|false {
+        $ch = curl_init($url);
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_TIMEOUT        => 30,
+            CURLOPT_HTTPHEADER     => [
+                'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+                'Accept-Language: en-GB,en;q=0.5',
+                'Accept-Encoding: identity',
+                'Connection: keep-alive',
+                'Upgrade-Insecure-Requests: 1',
+                'Sec-Fetch-Dest: document',
+                'Sec-Fetch-Mode: navigate',
+                'Sec-Fetch-Site: none',
+                'Sec-Fetch-User: ?1',
+            ],
+            CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko/20100101 Firefox/136.0',
+        ]);
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        return ($response !== false && $httpCode === 200) ? $response : false;
+    }
+
     /**
      * Import entries from Playing page.
      */
@@ -20,7 +45,7 @@ class Import extends BaseController {
         }
 
         // Load the Playing page. Need to strip whitespace from the start of the response.
-        $file = file_get_contents($playing_page_url);
+        $file = $this->fetchUrl($playing_page_url);
         if ($file === false) {
             throw new \Exception('Failed to load Playing page.');
             return;
@@ -43,7 +68,7 @@ class Import extends BaseController {
             // If the game has not already been added to the database
             if (empty($existingBackloggd)) {
                 // Fetch the individual game page and read additional metadata from there.
-                $file = file_get_contents('https://backloggd.com/games/' . $gameName . '/');
+                $file = $this->fetchUrl('https://backloggd.com/games/' . $gameName . '/');
                 if ($file === false) {
                     throw new \Exception('Failed to load Game page.');
                     return;
