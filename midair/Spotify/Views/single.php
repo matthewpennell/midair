@@ -5,16 +5,16 @@
 <?= $this->section('description') ?><?= $description ?><?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-    <div class=”content h-entry”>
-        <link class=”u-url” href=”<?= current_url() ?>”>
-        <div class=”content__image”>
-            <img src=”<?= $data->cover ?>” alt=”<?= $data->artist ?>”>
+    <div class="content h-entry">
+        <link class="u-url" href="<?= current_url() ?>">
+        <div class="content__image">
+            <img src="<?= $data->cover ?>" alt="<?= $data->artist ?>">
         </div>
-        <header class=”title”>
-            <h1 class=”p-name”>”<?= $data->track ?>” by <?= $data->artist ?></h1>
-            <div class=”source medium”>
-                <img class=”source-icon” src=”/images/spotify.svg” width=”20” height=”20” alt=”” />
-                <a class=”u-like-of” href=”<?= $data->url ?>” target=”_blank”>This track was saved as a favourite on <strong>Spotify</strong>. Visit the original here →</a>
+        <header class="title">
+            <h1 class="p-name">"<?= $data->track ?>" by <?= $data->artist ?></h1>
+            <div class="source medium">
+                <img class="source-icon" src="/images/spotify.svg" width="20" height="20" alt="" />
+                <a class="u-like-of" href="<?= $data->url ?>" target="_blank">This track was saved as a favourite on <strong>Spotify</strong>. Visit the original here →</a>
             </div>
         </header>
         <article>
