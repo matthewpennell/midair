@@ -11,7 +11,7 @@
             <img src="<?= $data->image ?>" alt="<?= $data->title ?>" class="u-photo">
         </div>
         <header class="title">
-            <h1>”<span class=”p-name”><?= $data->title ?></span>” by <span class=”p-author”><?= $data->author ?></span></h1>
+            <h1>”<span class="p-name"><?= $data->title ?></span>” by <span class="p-author"><?= $data->author ?></span></h1>
             <div class="source medium">
                 <img class="source-icon" src="/images/goodreads.png" width="20" height="20" alt="" />
                 <a href="<?= $data->link ?>" target="_blank">This review was originally posted on <strong>Goodreads</strong>. Visit the original here →</a>
