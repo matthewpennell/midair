@@ -215,6 +215,7 @@ h1, h2, h3, h4, h5, h6,
 .toc li > a,
 table,
 .consuming h2,
+.content__body figcaption,
 .pagination,
 footer,
 .now-playing-info {
@@ -1312,7 +1313,8 @@ article {
   font-size: 0.875rem;
   line-height: 1.71428;
   text-align: center;
-  margin-top: -1.75rem;
+  margin-top: calc(var(--grid-gap) / 4);
+  opacity: 0.71;
 }
 
 .content__body blockquote {
