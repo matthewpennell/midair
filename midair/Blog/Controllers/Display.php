@@ -64,6 +64,94 @@ class Display extends BaseController
             'description' => $blog->description,
             'search'      => 'blog',
             'webmentions' => $webmentions,
+            //'og_image'    => $this->generateOgImage($blog),
+            'og_image'    => base_url('images/og.png'),
         ]);
+    }
+
+    private function generateOgImage(object $blog): string
+    {
+        $wordCount = str_word_count(strip_tags($blog->content));
+        $readingTime = max(1, (int) round($wordCount / 200));
+
+        $payload = json_encode([
+            'name' => 'blog:magazine',
+            'params' => [
+                'title' => [
+                    'text'       => $blog->title,
+                    'fontFamily' => 'inter',
+                    'fontWeight' => 800,
+                    'fontSize'   => 48,
+                    'color'      => '#111827',
+                ],
+                'subtitle' => [
+                    'text'       => $blog->description,
+                    'fontFamily' => 'inter',
+                    'fontWeight' => 400,
+                    'fontSize'   => 24,
+                    'color'      => '#4b5563',
+                ],
+                'category' => [
+                    'text'       => 'BLOG',
+                    'fontFamily' => 'inter',
+                    'fontWeight' => 600,
+                    'fontSize'   => 16,
+                    'color'      => '#2563eb',
+                ],
+                'author' => [
+                    'text'       => 'Matthew Pennell',
+                    'fontFamily' => 'inter',
+                    'fontWeight' => 500,
+                    'fontSize'   => 18,
+                    'color'      => '#374151',
+                ],
+                'publishDate' => [
+                    'text'       => date('j F Y', strtotime($blog->pubDate)),
+                    'fontFamily' => 'inter',
+                    'fontWeight' => 400,
+                    'fontSize'   => 16,
+                    'color'      => '#6b7280',
+                ],
+                'readTime' => [
+                    'text'       => $readingTime . ' min read',
+                    'fontFamily' => 'inter',
+                    'fontWeight' => 400,
+                    'fontSize'   => 16,
+                    'color'      => '#6b7280',
+                ],
+                'featuredImage' => [
+                    'url' => base_url('images/portrait-bw.jpg'),
+                ],
+                'logo' => [
+                    'url' => base_url('apple-touch-icon.png'),
+                ],
+            ],
+        ]);
+
+        $ch = curl_init('https://myogimage.com/api/v1/images');
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST           => true,
+            CURLOPT_POSTFIELDS     => $payload,
+            CURLOPT_HTTPHEADER     => ['Content-Type: application/json'],
+            CURLOPT_TIMEOUT        => 5,
+        ]);
+        $body       = curl_exec($ch);
+        $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $curlError  = curl_error($ch);
+        curl_close($ch);
+
+        if ($body !== false && $statusCode === 200) {
+            $data = json_decode($body, true);
+            if (!empty($data['url'])) {
+                return $data['url'];
+            }
+            $trimmed = trim($body);
+            if (filter_var($trimmed, FILTER_VALIDATE_URL)) {
+                return $trimmed;
+            }
+        }
+
+        return base_url('images/og.png');
     }
 }

@@ -2,6 +2,9 @@
 
 <?= $this->section('head-extras') ?>
 <link rel="webmention" href="/webmention">
+<?php if (!empty($og_image)): ?>
+<meta property="og:image" content="<?= esc($og_image, 'attr') ?>">
+<?php endif; ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('title') ?><?= $title ?><?= $this->endSection() ?>
