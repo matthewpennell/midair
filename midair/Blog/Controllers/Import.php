@@ -97,7 +97,7 @@ class Import extends BaseController {
                     "repo" => env('atproto.did'),
                     "collection" => "site.standard.document",
                     "record" => [
-                        "$type": "site.standard.document",
+                        "\$type": "site.standard.document",
                         "site": env('atproto.uri'),
                         "title": $title,
                         "path": '/blog/' . $matches[1],
