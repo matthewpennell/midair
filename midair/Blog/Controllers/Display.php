@@ -66,6 +66,7 @@ class Display extends BaseController
             'webmentions' => $webmentions,
             //'og_image'    => $this->generateOgImage($blog),
             'og_image'    => base_url('images/og.png'),
+            'atproto_uri' => $blog->atproto_uri ?? null,
         ]);
     }
 

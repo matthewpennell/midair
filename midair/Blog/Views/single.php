@@ -5,6 +5,9 @@
 <?php if (!empty($og_image)): ?>
 <meta property="og:image" content="<?= esc($og_image, 'attr') ?>">
 <?php endif; ?>
+<?php if (!empty($atproto_uri)): ?>
+<link rel="site.standard.document" href="<?= $atproto_uri ?>">
+<?php endif; ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('title') ?><?= $title ?><?= $this->endSection() ?>

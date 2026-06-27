@@ -70,6 +70,7 @@ class Import extends BaseController {
 
                 $BlogModel->insert($data);
                 $newBlogsCount++;
+                $BlogID = $db->insertID();
                 log_message('info', 'Inserted new blog: ' . $title);
 
                 // Extract the post name from a standard Wordpress post URL.
@@ -90,6 +91,56 @@ class Import extends BaseController {
                 $MidairModel->insert($data);
 
                 log_message('info', 'Inserted new blog into main stream table.');
+
+                // Register new blog entry with ATproto.
+                $payload = [
+                    "repo" => env('atproto.did'),
+                    "collection" => "site.standard.document",
+                    "record" => [
+                        "$type": "site.standard.document",
+                        "site": env('atproto.uri'),
+                        "title": $title,
+                        "path": '/blog/' . $matches[1],
+                        "description": $description,
+                        "publishedAt": date('c', strtotime($pubDate)),
+                        //"tags": ["introduction", "blog"],
+                        "textContent": $content,
+                    ]
+                ];
+
+                $ch = curl_init("https://bsky.social/xrpc/com.atproto.repo.createRecord");
+
+                curl_setopt_array($ch, [
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_POST => true,
+                    CURLOPT_HTTPHEADER => [
+                        "Content-Type: application/json",
+                        "Authorization: Bearer " . env('atproto.accessJwt'),
+                    ],
+                    CURLOPT_POSTFIELDS => json_encode($payload)
+                ]);
+
+                $response = curl_exec($ch);
+                $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+                if (curl_errno($ch)) {
+                    throw new Exception("cURL error: " . curl_error($ch));
+                }
+
+                curl_close($ch);
+
+                if ($httpCode !== 200) {
+                    throw new Exception("ATproto API error ($httpCode): " . $response);
+                }
+
+                // Write the ATproto response to the database for use in the <link> of blog posts.
+                $responseData = json_decode($response, true);
+                $atprotoUri = $responseData['uri'] ?? null;
+                $BlogModel->update(BlogID, array(
+                    'atproto_uri' => $atprotoUri
+                ));
+
+                log_message('info', json_decode($response, true));
 
             }
 
