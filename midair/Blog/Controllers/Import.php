@@ -97,14 +97,14 @@ class Import extends BaseController {
                     "repo" => env('atproto.did'),
                     "collection" => "site.standard.document",
                     "record" => [
-                        "\$type": "site.standard.document",
-                        "site": env('atproto.uri'),
-                        "title": $title,
-                        "path": '/blog/' . $matches[1],
-                        "description": $description,
-                        "publishedAt": date('c', strtotime($pubDate)),
+                        "\$type" => "site.standard.document",
+                        "site" => env('atproto.uri'),
+                        "title" => $title,
+                        "path" => '/blog/' . $matches[1],
+                        "description" => $description,
+                        "publishedAt" => date('c', strtotime($pubDate)),
                         //"tags": ["introduction", "blog"],
-                        "textContent": $content,
+                        "textContent" => $content,
                     ]
                 ];
 
