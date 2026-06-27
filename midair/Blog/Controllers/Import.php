@@ -143,7 +143,7 @@ class Import extends BaseController {
                 $builder->where('id', $BlogID);
                 $builder->update($data);
 
-                log_message('info', json_decode($response, true));
+                log_message('info', "Registered new blog entry with ATproto: $atprotoUri");
 
             }
 
