@@ -26,11 +26,21 @@
         </li>
         <li>
             <a href="/writing">Writing</a>
-            <p>Irregular updates on life, work, hobbies and stuff. Most recently ‘<a href="/<?= $latest_writing->type ?>/<?= $latest_writing->url ?>"><?= $latest_writing->title ?></a>’ was posted on <?= date('jS M Y', strtotime($latest_writing->date)) ?>.</p>
+            <p>
+                Irregular updates on life, work, hobbies and stuff. 
+                <?php if ($latest_writing): ?>
+                    Most recently ‘<a href="/<?= $latest_writing->type ?>/<?= $latest_writing->url ?>"><?= $latest_writing->title ?></a>’ was posted on <?= date('jS M Y', strtotime($latest_writing->date)) ?>.
+                <?php endif; ?>
+            </p>
         </li>
         <li>
             <a href="/consuming">Consuming</a>
-            <p>Movies, books, music and reviews. Most recently ‘<a href="/<?= $latest_consuming->type ?>/<?= $latest_consuming->url ?>"><?= $latest_consuming->title ?></a>’ was posted on <?= date('jS M Y', strtotime($latest_consuming->date)) ?>.</p>
+            <p>
+                Movies, books, music and reviews.
+                <?php if ($latest_consuming): ?>
+                    Most recently ‘<a href="/<?= $latest_consuming->type ?>/<?= $latest_consuming->url ?>"><?= $latest_consuming->title ?></a>’ was posted on <?= date('jS M Y', strtotime($latest_consuming->date)) ?>.
+                <?php endif; ?>
+            </p>
         </li>
         <li>
             <a href="/colophon">Colophon</a>
@@ -38,5 +48,7 @@
         </li>
         </ul>
     </nav>
-    <div id="latest-bluesky"><?= $latest_bluesky->excerpt ?></div>
+    <?php if ($latest_bluesky): ?>
+        <div id="latest-bluesky"><?= $latest_bluesky->excerpt ?></div>
+    <?php endif; ?>
 <?= $this->endSection() ?>

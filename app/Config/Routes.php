@@ -73,3 +73,8 @@ $routes->get('accessibility-statement', static function () {
         'type' => 'a11y',
     ]);
 });
+
+// ATproto routes.
+$routes->get('.well-known/site.standard.publication', static function () {
+    return 'at://did:plc:xovawoez4ljbddzuytbwxqfy/site.standard.publication/3mpbhytpog32f';
+});
