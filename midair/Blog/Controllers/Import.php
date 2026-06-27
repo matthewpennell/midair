@@ -136,9 +136,12 @@ class Import extends BaseController {
                 // Write the ATproto response to the database for use in the <link> of blog posts.
                 $responseData = json_decode($response, true);
                 $atprotoUri = $responseData['uri'] ?? null;
-                $BlogModel->update($BlogID, array(
-                    'atproto_uri' => $atprotoUri
-                ));
+                $data = [
+                    'atproto_uri' => $atprotoUri,
+                ];
+                $builder = $db->table('blog');
+                $builder->where('id', $BlogID);
+                $builder->update($data);
 
                 log_message('info', json_decode($response, true));
 
