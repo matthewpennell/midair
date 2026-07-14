@@ -60,6 +60,11 @@ class Import extends BaseController {
                 // If the track doesn't exist, insert it into the database.
 
                 // First retrieve the album information from the Spotify API to get the track listing and copyright.
+                if (!isset($item->track->album->id)) {
+                    log_message('error', 'Album ID not found for track: ' . $item->track->name);
+                    continue; // Skip this track if album ID is not available
+                }
+
                 $albumDetails = $api->getAlbum($item->track->album->id);
         
                 $track_listing = '';
