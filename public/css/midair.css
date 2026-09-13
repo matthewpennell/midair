@@ -50,135 +50,6 @@
 }
 
 /* ==========================================================================
-   1b. Dark Mode Overrides
-   ========================================================================== */
-
-[data-theme="dark"] {
-    /* Semantic tokens */
-    --color-text: oklch(93% 0 0);
-    --color-bg: oklch(13% 0.005 240);
-    --color-border: oklch(28% 0 0);
-    --color-surface: oklch(19% 0.005 240);
-    --color-text-muted: oklch(65% 0 0);
-
-    /* Palette — adjusted for readability as content-area accents on dark bg */
-    --magenta: oklch(70% 0.185 357.06);
-    --dark-teal: oklch(55% 0.057 223.30);
-    --teal: oklch(60% 0.067 188.53);
-    --blue: oklch(62% 0.254 269.88);
-    --olive: oklch(62% 0.050 100.79);
-    --cyan: oklch(62% 0.142 182.04);
-    --purple: oklch(62% 0.197 289.57);
-    --yellow: oklch(78% 0.161 100.14);
-    --pink: oklch(68% 0.210 341.52);
-    --gold: oklch(68% 0.151 98.49);
-}
-
-/* Section meta pane backgrounds — explicit dark values so they stay deep/moody
-   rather than using the lightened palette vars above */
-[data-theme="dark"] .home .layout__pane--meta {
-    background-color: oklch(28% 0.161 100.14);
-}
-[data-theme="dark"] .home .layout__pane--meta::before {
-    background: radial-gradient(ellipse 70% 60% at 50% 50%, oklch(28% 0.161 100.14) 40%, oklch(28% 0.161 100.14 / 0.9) 100%);
-}
-[data-theme="dark"] .writing .layout__pane--meta {
-    background-color: oklch(26% 0.067 188.53);
-}
-[data-theme="dark"] .writing .layout__pane--meta::before {
-    background: radial-gradient(ellipse 70% 60% at 60% 30%, oklch(26% 0.067 188.53) 40%, oklch(26% 0.067 188.53 / 0.9) 100%);
-}
-[data-theme="dark"] .consuming .layout__pane--meta {
-    background-color: oklch(26% 0.197 289.57);
-}
-[data-theme="dark"] .consuming .layout__pane--meta::before {
-    background: radial-gradient(ellipse 70% 60% at 60% 30%, oklch(26% 0.197 289.57) 40%, oklch(26% 0.197 289.57 / 0.9) 100%);
-}
-[data-theme="dark"] .about .layout__pane--meta {
-    background-color: oklch(26% 0.254 269.88);
-}
-[data-theme="dark"] .about .layout__pane--meta::before {
-    background: radial-gradient(ellipse 70% 60% at 60% 30%, oklch(26% 0.254 269.88) 40%, oklch(26% 0.254 269.88 / 0.9) 100%);
-}
-[data-theme="dark"] .work .layout__pane--meta {
-    background-color: oklch(26% 0.050 100.79);
-}
-[data-theme="dark"] .work .layout__pane--meta::before {
-    background: radial-gradient(ellipse 70% 60% at 60% 30%, oklch(26% 0.050 100.79) 40%, oklch(26% 0.050 100.79 / 0.9) 100%);
-}
-[data-theme="dark"] .now .layout__pane--meta {
-    background-color: oklch(26% 0.142 182.04);
-}
-[data-theme="dark"] .now .layout__pane--meta::before {
-    background: radial-gradient(ellipse 70% 60% at 60% 30%, oklch(26% 0.142 182.04) 40%, oklch(26% 0.142 182.04 / 0.9) 100%);
-}
-[data-theme="dark"] .contact .layout__pane--meta {
-    background-color: oklch(26% 0.210 341.52);
-}
-[data-theme="dark"] .contact .layout__pane--meta::before {
-    background: radial-gradient(ellipse 70% 60% at 60% 30%, oklch(26% 0.210 341.52) 40%, oklch(26% 0.210 341.52 / 0.9) 100%);
-}
-[data-theme="dark"] .colophon .layout__pane--meta {
-    background-color: oklch(26% 0.151 98.49);
-}
-[data-theme="dark"] .colophon .layout__pane--meta::before {
-    background: radial-gradient(ellipse 70% 60% at 60% 30%, oklch(26% 0.151 98.49) 40%, oklch(26% 0.151 98.49 / 0.9) 100%);
-}
-
-/* In dark mode, home/now/colophon meta text was overridden to #000 — restore to white */
-[data-theme="dark"] .home .layout__pane--meta,
-[data-theme="dark"] .now .layout__pane--meta,
-[data-theme="dark"] .colophon .layout__pane--meta {
-    color: #fff;
-}
-
-[data-theme="dark"] .home footer, [data-theme="dark"] .home footer a,
-[data-theme="dark"] .now footer, [data-theme="dark"] .now footer a,
-[data-theme="dark"] .colophon footer, [data-theme="dark"] .colophon footer a {
-    color: #fff;
-}
-
-/* Content area background and text */
-[data-theme="dark"] .layout__pane--content {
-    background-color: var(--color-bg);
-    color: var(--color-text);
-}
-
-/* Logo strokes — match the dark meta pane backgrounds exactly */
-[data-theme="dark"] .home .logo path,
-[data-theme="dark"] .home .logo line {
-    stroke: oklch(28% 0.161 100.14);
-}
-[data-theme="dark"] .writing .logo path,
-[data-theme="dark"] .writing .logo line {
-    stroke: oklch(26% 0.067 188.53);
-}
-[data-theme="dark"] .consuming .logo path,
-[data-theme="dark"] .consuming .logo line {
-    stroke: oklch(26% 0.197 289.57);
-}
-[data-theme="dark"] .about .logo path,
-[data-theme="dark"] .about .logo line {
-    stroke: oklch(26% 0.254 269.88);
-}
-[data-theme="dark"] .work .logo path,
-[data-theme="dark"] .work .logo line {
-    stroke: oklch(26% 0.050 100.79);
-}
-[data-theme="dark"] .now .logo path,
-[data-theme="dark"] .now .logo line {
-    stroke: oklch(26% 0.142 182.04);
-}
-[data-theme="dark"] .contact .logo path,
-[data-theme="dark"] .contact .logo line {
-    stroke: oklch(26% 0.210 341.52);
-}
-[data-theme="dark"] .colophon .logo path,
-[data-theme="dark"] .colophon .logo line {
-    stroke: oklch(26% 0.151 98.49);
-}
-
-/* ==========================================================================
    2. Grid System
    ========================================================================== */
 :root {
@@ -693,43 +564,10 @@ a {
   }  
 }
 
-/* Theme toggle button */
-.theme-toggle {
-    background: transparent;
-    border: 0;
-    width: 36px;
-    height: 36px;
-    cursor: pointer;
-    color: inherit;
-    opacity: 0.71;
-    transition: opacity 0.2s ease;
-    padding: 0;
-    margin-left: calc(var(--grid-gap) + 3px);
-    position: absolute;
-    top: 276px;
-    left: 0;
-}
-
-.theme-toggle:hover,
-.theme-toggle:focus {
-    opacity: 1;
-}
-
-.theme-toggle .material-symbols-outlined {
-    font-size: 20px;
-}
-
 @media (max-width: 799px) {
     .nav-wrapper {
         position: absolute;
         width: 100%;
-    }
-    .theme-toggle {
-        top: calc((48px - 36px) / 2);
-        right: calc(var(--grid-gap) * 2);
-        left: auto;
-        color: var(--yellow);
-        z-index: 3;
     }
 }
 
@@ -1192,14 +1030,6 @@ a {
 
 .share__links a svg .black {
   fill: #000;
-}
-
-[data-theme="dark"] .share__links a svg .white {
-  fill: #000;
-}
-
-[data-theme="dark"] .share__links a svg .black {
-  fill: #fff;
 }
 
 @media (max-width: 1279px) {
