@@ -31,6 +31,7 @@ class Import extends BaseController {
         $BlogModel = new \Midair\Blog\Models\Blog();
         $MidairModel = new \App\Models\Midair();
         $newBlogsCount = 0;
+        $atprotoToken = null;
 
         // Loop through the RSS feed items and save them to the database.
         foreach ($rss->channel->item as $item) {
@@ -93,6 +94,10 @@ class Import extends BaseController {
                 log_message('info', 'Inserted new blog into main stream table.');
 
                 // Register new blog entry with ATproto.
+                // Get a fresh access JWT (lazily, once per run) by creating a
+                // session with the account credentials from the environment.
+                $atprotoToken ??= $this->getAtprotoAccessToken();
+
                 $payload = [
                     "repo" => env('atproto.did'),
                     "collection" => "site.standard.document",
@@ -108,14 +113,18 @@ class Import extends BaseController {
                     ]
                 ];
 
-                $ch = curl_init("https://bsky.social/xrpc/com.atproto.repo.createRecord");
+                // The ATproto endpoint is configurable so it can be pointed at a
+                // test relay (https://test.atproto.network) or a local mock server
+                // in development. Defaults to bsky.social.
+                $endpoint = rtrim(env('atproto.endpoint', 'https://bsky.social'), '/');
+                $ch = curl_init($endpoint . "/xrpc/com.atproto.repo.createRecord");
 
                 curl_setopt_array($ch, [
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_POST => true,
                     CURLOPT_HTTPHEADER => [
                         "Content-Type: application/json",
-                        "Authorization: Bearer " . env('atproto.accessJwt'),
+                        "Authorization: Bearer " . $atprotoToken,
                     ],
                     CURLOPT_POSTFIELDS => json_encode($payload)
                 ]);
@@ -124,7 +133,7 @@ class Import extends BaseController {
                 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
                 if (curl_errno($ch)) {
-                    throw new Exception("cURL error: " . curl_error($ch));
+                    throw new \Exception("cURL error: " . curl_error($ch));
                 }
 
                 curl_close($ch);
@@ -154,6 +163,56 @@ class Import extends BaseController {
             echo "$newBlogsCount new blog articles imported.\n";
         }
  
+    }
+
+    /**
+     * Get a fresh ATproto access JWT by creating a session with the account
+     * credentials from the environment variables. Access JWTs expire after
+     * about two hours, so one is fetched per import run instead of relying on
+     * a token stored in .env.
+     */
+    private function getAtprotoAccessToken() {
+
+        $endpoint = rtrim(env('atproto.endpoint', 'https://bsky.social'), '/');
+        $ch = curl_init($endpoint . "/xrpc/com.atproto.server.createSession");
+
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_HTTPHEADER => [
+                "Content-Type: application/json",
+            ],
+            CURLOPT_POSTFIELDS => json_encode([
+                "identifier" => env('atproto.email'),
+                "password" => env('atproto.password'),
+            ])
+        ]);
+
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        if (curl_errno($ch)) {
+            throw new \Exception("cURL error: " . curl_error($ch));
+        }
+
+        curl_close($ch);
+
+        if ($httpCode !== 200) {
+            throw new \Exception("ATproto createSession error ($httpCode): " . $response);
+        }
+
+        // The live bsky.social relay returns "accessJwt"; the documented field
+        // name is "access". Handle both.
+        $responseData = json_decode($response, true);
+        $token = $responseData['accessJwt'] ?? $responseData['access'] ?? null;
+
+        if (empty($token)) {
+            throw new \Exception("ATproto createSession response contained no access token: " . $response);
+        }
+
+        log_message('info', 'Obtained fresh ATproto session token.');
+
+        return $token;
     }
 
 }
