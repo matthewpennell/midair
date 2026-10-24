@@ -19,7 +19,7 @@ Midair currently supports importing content from the following providers:
 
 ### Prerequisites
 
-- PHP 8.2
+- PHP 8.4
 - MySQL 8.0
 - Composer
 - Git
@@ -32,6 +32,10 @@ Midair currently supports importing content from the following providers:
 3. Run `docker compose up`
 
 Any SQL dump file can be imported into the database at startup by placing it inside a `mysql` directory in the root of the project.
+
+### Upgrades
+
+To upgrade the version of CodeIgniter in use, refer to CodeIgniter's [upgrade documentation](https://codeigniter.com/user_guide/installation/upgrading.html) and [release list](https://github.com/codeigniter4/framework/releases). Download the target version .zip archive and copy the `system` folder and any other files that have been changed between the current version and the target one. Ensure any manually updated files are merged rather than overwritten.
 
 ## Adding a new provider module
 
