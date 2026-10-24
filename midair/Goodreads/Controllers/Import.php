@@ -94,65 +94,54 @@ class Import extends BaseController {
                 }
                 $categoriesString = implode(', ', $categories);
 
-                /**
-                 * 22/02/26: Goodreads seems to have blocked fetching the contents of the individual book pages, 
-                 * so I can no longer request the proper title, description, publication date, and image URL. 
-                 * For now, I'll just pull what I can from the RSS feed and save that to the database, but ideally 
-                 * I would like to be able to fetch the full review content and metadata from the book page. I'll 
-                 * need to look into whether there's a way around this block in the future.
-                 *
+                // Look up the book in Open Library, keeping the RSS values if no match is found.
+                $openLibraryUrl = 'https://openlibrary.org/search.json?' . http_build_query([
+                    'title' => $title,
+                    'author' => $author,
+                ]);
+                $openLibraryResponse = $this->fetchUrl($openLibraryUrl);
+                $openLibraryResults = $openLibraryResponse !== false
+                    ? json_decode($openLibraryResponse, true)
+                    : null;
+                $openLibraryBook = $openLibraryResults['docs'][0] ?? [];
+                $openLibraryAuthor = $openLibraryBook['author_name'][0] ?? '';
+                $openLibraryCoverId = $openLibraryBook['cover_i'] ?? null;
+                $openLibraryKey = $openLibraryBook['key'] ?? '';
+                $openLibraryCoverEditionKey = $openLibraryBook['cover_edition_key'] ?? '';
+                $openLibraryTitle = $openLibraryBook['title'] ?? '';
+                $publicationDate = $openLibraryBook['first_publish_year'] ?? '';
+                $bookDescription = '';
 
-                // Request the review from Goodreads and extract the parts we need to complete the model.
-                $options  = array('http' => array('user_agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'));
-                $context  = stream_context_create($options);
-                $bookReviewPage = file_get_contents($link, false, $context);
-
-                // Extract the title from the H1.
-                preg_match('/<h1>(.+?)<\/h1>/', $bookReviewPage, $matches);
-                $title = explode(' &gt; ', $matches[1] ?? '');
-                $title = $title[count($title) - 1];
-
-                // Extract the author name from the authorName link.
-                preg_match('/<a[^>]*?class="authorName"[^>]*?>\s*<span[^>]*>([^<]+)<\/span>\s*<\/a>/i', $bookReviewPage, $matches);
-                $author = $matches[1] ?? '';
-
-                // Extract the review from the reviewText div.
-                preg_match('/<div\s+class="[^"]*reviewText[^"]*"\s+[^>]*?>\s*(.+?)\s*<\/div>/is', $bookReviewPage, $matches);
-                $description = $matches[1] ?? '';
-
-                // Grab the rating.
-                preg_match('/<div\s+class="rating"\s+itemprop="reviewRating"[^>]*>\s*<span\s+class="value-title"\s+title="([^"]+)"/', $bookReviewPage, $matches);
-                $rating = $matches[1] ?? '';
-
-                // Now request the actual book page and retrieve the remaining pieces of metadata.
-                preg_match('/<a\s+[^>]*?class="[^"]*\bbookTitle\b[^"]*"[^>]*\bhref="([^"]+)"[^>]*>/i', $bookReviewPage, $matches);
-                $bookUrl = $matches[1] ?? '';
-                $bookDetailPage = file_get_contents('https://www.goodreads.com' . $bookUrl, false, $context);
-
-                // Pull the image URL out of the JavaScript metadata.
-                preg_match('/"imageUrl":"([^"]+\.(?:jpg|jpeg|png|gif|webp))"/i', $bookDetailPage, $matches);
-                $image = $matches[1] ?? '';
-
-                // Pull the book description out of the JavaScript metadata.
-                preg_match_all('/"description":"((?:[^"\\\]|\\\\.)*)"/i', $bookDetailPage, $matches);
-                $book_description = $matches[1][1] ?? ''; // not sure if this will always be the second match...
-
-                // Pull the publication date out of the JavaScript metadata.
-                if (preg_match('/"publicationTime":(-?\d+)/', $bookDetailPage, $matches)) {
-                    $timestamp = $matches[1] / 1000; // Convert to seconds
-                    $formattedDate = date('F j, Y', $timestamp);
+                if ($openLibraryKey !== '') {
+                    $workResponse = $this->fetchUrl('https://openlibrary.org' . $openLibraryKey . '.json');
+                    $workData = $workResponse !== false
+                        ? json_decode($workResponse, true)
+                        : null;
+                    $workDescription = $workData['description'] ?? '';
+                    $bookDescription = is_array($workDescription)
+                        ? ($workDescription['value'] ?? '')
+                        : $workDescription;
+                    $bookDescription = is_string($bookDescription) ? $bookDescription : '';
+                    $bookDescription = trim(explode('---', $bookDescription, 2)[0]);
                 }
-                $publication_date = $formattedDate ?? '';
 
-                //*/
+                if ($openLibraryAuthor !== '') {
+                    $author = $openLibraryAuthor;
+                }
+                if ($openLibraryTitle !== '') {
+                    $title = $openLibraryTitle;
+                }
+                if ($openLibraryCoverId !== null) {
+                    $image = 'https://covers.openlibrary.org/b/OLID/' . rawurlencode((string) $openLibraryCoverEditionKey) . '-M.jpg';
+                }
 
                 $data = array(
                     'title' => $title,
                     'link' => $link,
                     'description' => $description,
                     'content' => $description,
-                    //'book_description' => $book_description,
-                    //'publication_date' => $publication_date,
+                    'book_description' => $bookDescription,
+                    'publication_date' => $publicationDate,
                     'image' => $image,
                     'author'=> $author,
                     'rating' => $rating,
