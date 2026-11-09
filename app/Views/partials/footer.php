@@ -72,7 +72,7 @@
         </li>
     </ul>
     <p>
-        Copyright &copy; 2004-2025 <span class="p-name">Matthew Pennell</span>. All rights reserved. Pls no feed to the AI.
+        Copyright &copy; 2004-<?php echo date('Y'); ?> <span class="p-name">Matthew Pennell</span>. All rights reserved. Pls no feed to the AI.
         <br>
         <a href="/accessibility-statement">Accessibility statement</a> &bull; <a href="/feeds">RSS feeds</a> &bull; <a href="/colophon">Credits & colophon</a>
     </p>
